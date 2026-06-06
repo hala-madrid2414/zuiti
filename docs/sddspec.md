@@ -1,261 +1,171 @@
-# Codex Agent Rules - Spec Driven Development (SDD)
+# Codex SDD Constitution
 
-## Core Principle
+This repository uses Spec Driven Development (SDD) to make Codex behave closer to Trae Spec Mode. The agent must treat this file as the project constitution for non-trivial work.
 
-This repository follows Spec Driven Development (SDD).
+## 1. Core Rule
 
-The agent must never start implementation immediately after receiving a feature request.
+Do not start implementation immediately after a feature, refactor, migration, architecture, or user-facing workflow request.
 
-Every non-trivial task must follow the workflow below:
+The required workflow is:
 
-Requirements
-→ Spec
-→ Design
-→ Tasks
-→ Validation Checklist
-→ Implementation
-→ Verification
+`Specify -> Clarify -> Plan -> Tasks -> Checklist / Analyze -> Implement -> Verify`
 
 Code is the final artifact, not the first artifact.
 
----
+## 2. Canonical Directories
 
-## Mandatory Workflow
+New Codex SDD artifacts must live under:
 
-For every new feature, refactor, migration, or architectural change:
+`docs/specs/<feature-name>/`
 
-### Phase 1 - Specification
+Each feature directory must contain:
 
-Create:
+- `spec.md`
+- `design.md`
+- `tasks.md`
+- `checklist.md`
 
-/docs/specs/<feature-name>/spec.md
+The old `.trae/specs/` directory is historical reference material for Trae Spec Mode. Read it when useful for style or migration context, but do not create new Codex SDD artifacts there unless the user explicitly asks for Trae compatibility.
 
-Required structure:
+If a Spec Kit command, tool, or template creates output under a default `specs/` directory, move or mirror the result into `docs/specs/<feature-name>/` and update internal references.
 
-# Problem
+## 3. Codex Skills
 
-Describe the current problem.
+Project-local Spec Kit style skills are installed under `.agents/skills`:
 
-# Goal
+- `$speckit-constitution`: initialize or update this SDD constitution.
+- `$speckit-specify`: create or update `spec.md`.
+- `$speckit-clarify`: resolve open product and technical questions before design.
+- `$speckit-plan`: create or update `design.md`.
+- `$speckit-tasks`: create or update `tasks.md`.
+- `$speckit-checklist`: create or update `checklist.md`.
+- `$speckit-analyze`: validate consistency across all SDD artifacts.
+- `$speckit-implement`: implement only tasks defined in `tasks.md`.
 
-Describe the expected outcome.
+When a user says SDD, Spec Mode, Trae Spec Mode, `/spec`, `/plan`, `/tasks`, `/implement`, or asks to implement an existing SDD plan, use the matching skill.
 
-# Non Goals
+## 4. Specification Phase
 
-Explicitly define what is out of scope.
+Create or update:
 
-# User Stories
+`docs/specs/<feature-name>/spec.md`
 
-List user-facing scenarios.
+Required sections:
 
-# Acceptance Criteria
+- Problem
+- Goal
+- Non Goals
+- User Stories
+- Acceptance Criteria
+- Edge Cases
 
-Define measurable success conditions.
+The spec must describe observable behavior and success criteria. Do not write production code during this phase.
 
-# Edge Cases
+## 5. Design Phase
 
-Document boundary conditions and failure cases.
+Create or update:
 
-Do NOT generate code during this phase.
+`docs/specs/<feature-name>/design.md`
 
----
+Required sections:
 
-### Phase 2 - Design
+- Architecture
+- Data Flow
+- Data Model
+- API Design
+- UI / UX Design, when applicable
+- Security Considerations
+- Performance Considerations
+- Risks
+- Alternatives Considered
 
-Create:
+For this project, design must follow existing Next.js App Router, React 19, CSS Modules, and `antd-mobile` patterns unless the spec explicitly requires a change.
 
-/docs/specs/<feature-name>/design.md
+Before designing or implementing Next.js behavior, read the relevant document in `node_modules/next/dist/docs/`. This project uses Next.js 16.2.7 and may differ from older Next.js behavior.
 
-Required structure:
+## 6. Task Phase
 
-# Architecture
+Create or update:
 
-# Data Flow
+`docs/specs/<feature-name>/tasks.md`
 
-# Data Model
+Required task groups:
 
-# API Design
+- P0: Critical setup and blockers
+- P1: Backend or data tasks
+- P2: Frontend or UI tasks
+- P3: Testing and verification tasks
+- P4: Documentation and cleanup tasks
 
-# Security Considerations
+Tasks must be ordered by dependency. Each task must be independently verifiable. If a group does not apply, keep the heading and write `None for this feature.`
 
-# Performance Considerations
+## 7. Checklist Phase
 
-# Risks
+Create or update:
 
-# Alternatives Considered
+`docs/specs/<feature-name>/checklist.md`
 
-Do NOT implement code during this phase.
+Minimum checklist:
 
----
-
-### Phase 3 - Tasks
-
-Create:
-
-/docs/specs/<feature-name>/tasks.md
-
-Required structure:
-
-P0
-
-* Critical tasks
-
-P1
-
-* Backend tasks
-
-P2
-
-* Frontend tasks
-
-P3
-
-* Testing tasks
-
-P4
-
-* Documentation tasks
-
-Tasks must be ordered by dependency.
-
-Each task must be independently verifiable.
-
----
-
-### Phase 4 - Validation Checklist
-
-Create:
-
-/docs/specs/<feature-name>/checklist.md
-
-Required structure:
-
-[ ] Acceptance criteria satisfied
-
-[ ] Unit tests added
-
-[ ] Integration tests added
-
-[ ] E2E tests added (if applicable)
-
-[ ] Lint passes
-
-[ ] Build passes
-
-[ ] Security review completed
-
-[ ] Documentation updated
-
-[ ] Breaking changes documented
-
----
-
-### Phase 5 - Review Gate
+- [ ] Acceptance criteria satisfied
+- [ ] Unit tests added or explicitly not applicable
+- [ ] Integration tests added or explicitly not applicable
+- [ ] E2E/manual browser checks completed when UI changes are involved
+- [ ] `npm run lint` passes
+- [ ] `npm run build` passes
+- [ ] Security review completed
+- [ ] Documentation updated
+- [ ] Breaking changes documented or explicitly absent
+
+## 8. Review Gate
 
 Before implementation:
 
-1. Verify spec.md exists
-2. Verify design.md exists
-3. Verify tasks.md exists
-4. Verify checklist.md exists
+1. Verify `spec.md` exists.
+2. Verify `design.md` exists.
+3. Verify `tasks.md` exists.
+4. Verify `checklist.md` exists.
+5. Verify `tasks.md` maps back to acceptance criteria.
+6. Verify implementation will not touch work outside the documented scope.
 
-If any document is missing:
+If any artifact is missing or inconsistent, stop and generate or repair the SDD artifacts first.
 
-STOP.
+## 9. Implementation Rules
 
-Generate the missing documents first.
+Implementation must follow `tasks.md` sequentially unless dependency order requires a different documented order.
 
----
+Do not implement tasks that are not defined in `tasks.md`.
 
-### Phase 6 - Implementation
+After completing a task:
 
-Implement tasks sequentially.
+- Mark the task complete in `tasks.md`.
+- Update `checklist.md` when a checklist item is proven.
+- Run the smallest relevant verification before moving to broader checks.
 
-Never implement tasks not defined in tasks.md.
+## 10. Verification Rules
 
-Update progress after every completed task.
+Before declaring completion, run:
 
-Mark completed tasks in tasks.md.
+- `npm run lint`
+- `npm run build`
+- Any feature-specific checks listed in `checklist.md`
 
----
+For UI work, use a browser or screenshot workflow to inspect the changed routes. For this mobile-oriented project, default visual verification should include a `375x750` viewport and any additional viewport listed in the active spec.
 
-### Phase 7 - Verification
+## 11. Refactoring Rules
 
-Before declaring completion:
+For refactors, the spec must also document:
 
-Run:
+- Current Architecture
+- Proposed Architecture
+- Migration Strategy
+- Rollback Strategy
+- Risk Analysis
 
-* lint
-* type check
-* unit tests
-* integration tests
-* build validation
+Do not modify production code until those sections are present.
 
-Verify every checklist item.
+## 12. Large Task Rules
 
-Only mark the feature complete when all checklist items pass.
+If the estimated work touches more than five files, changes more than 300 lines, or crosses multiple subsystems, decompose it into multiple feature directories or task groups.
 
----
-
-## Planning Rules
-
-When the user asks for a plan:
-
-DO NOT create a generic implementation plan.
-
-Instead generate:
-
-1. spec.md
-2. design.md
-3. tasks.md
-4. checklist.md
-
-This repository treats planning as specification generation.
-
----
-
-## Refactoring Rules
-
-For refactors:
-
-Create:
-
-refactor-spec.md
-
-Include:
-
-* Current Architecture
-* Proposed Architecture
-* Migration Strategy
-* Rollback Strategy
-* Risk Analysis
-
-Before modifying production code.
-
----
-
-## Large Task Rules
-
-If estimated work exceeds:
-
-* 5 files changed
-* 300 lines modified
-* multiple subsystems
-
-The task must be decomposed into multiple task groups.
-
-Never execute large changes as a single step.
-
----
-
-## Completion Criteria
-
-A task is complete only when:
-
-* Acceptance criteria pass
-* Tests pass
-* Build passes
-* Checklist is fully completed
-* Documentation is updated
-
-Implementation alone is not completion.
+Never execute large changes as a single undocumented step.
