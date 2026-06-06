@@ -1,3 +1,8 @@
+"use client";
+
+import { Slider } from "antd-mobile";
+import stylesCss from "./ToneSlider.module.css";
+
 type ToneSliderProps = {
   title: string;
   left: string;
@@ -8,21 +13,21 @@ type ToneSliderProps = {
 
 export function ToneSlider({ title, left, right, value, dark = false }: ToneSliderProps) {
   return (
-    <section className="soft-card px-5 py-4">
-      <h2 className="text-[17px] font-black">{title}</h2>
-      <div className="mt-4 flex items-center gap-4">
-        <span className="w-9 text-[12px] font-bold text-[#727b91]">{left}</span>
-        <div className="slider-track" aria-hidden="true">
-          <span
-            className={dark ? "slider-fill dark" : "slider-fill"}
-            style={{ width: `${value}%` }}
-          />
-          <span
-            className={dark ? "slider-thumb dark" : "slider-thumb"}
-            style={{ left: `${value}%` }}
+    <section className={`soft-card ${stylesCss.container}`}>
+      <h2 className={stylesCss.title}>{title}</h2>
+      <div className={stylesCss.sliderRow}>
+        <span className={stylesCss.leftLabel}>{left}</span>
+        <div className={stylesCss.sliderWrapper}>
+          <Slider
+            value={value}
+            style={{
+              "--fill-color": dark ? "#131a32" : "linear-gradient(90deg, #b789f4, #887dff)",
+              "--track-height": "6px",
+            } as any}
+            icon={<div className={`${stylesCss.thumb} ${dark ? stylesCss.thumbDark : ""}`} />}
           />
         </div>
-        <span className="w-14 text-right text-[12px] font-bold text-[#727b91]">
+        <span className={stylesCss.rightLabel}>
           {right}
         </span>
       </div>

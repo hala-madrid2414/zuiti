@@ -1,0 +1,45 @@
+.container {
+  padding: 16px 20px;
+}
+
+.label {
+  display: inline-flex;
+  border-radius: 9999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.lavender {
+  background-color: #e9ddff;
+  color: #5a45ad;
+}
+
+.blue {
+  background-color: #dfeaff;
+  color: #4365a8;
+}
+
+.pink {
+  background-color: #ffd9f1;
+  color: #a33f88;
+}
+
+.text {
+  margin-top: 16px;
+  white-space: pre-line;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 28px;
+  color: #22283a;
+}
+
+.actions {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #43495e;
+}

@@ -1,5 +1,6 @@
 import { DecorativeIcon } from "./DecorativeIcon";
 import type { IconKind } from "./content";
+import styles from "./StyleCard.module.css";
 
 type StyleCardProps = {
   title: string;
@@ -11,7 +12,7 @@ type StyleCardProps = {
 export function StyleCard({ title, detail, icon, active = false }: StyleCardProps) {
   return (
     <button type="button" className={`style-card group ${active ? "active" : ""}`}>
-      <span className="text-[14px] font-black">{title}</span>
+      <span className={styles.title}>{title}</span>
       <DecorativeIcon kind={icon} size="md" />
       <span className="style-tip">{detail}</span>
     </button>

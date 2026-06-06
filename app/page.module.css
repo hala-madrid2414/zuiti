@@ -1,0 +1,42 @@
+.container {
+  overflow: hidden;
+  padding: 24px 24px 0;
+}
+
+.heroSection {
+  position: relative;
+  margin-top: 48px;
+}
+
+.title {
+  font-size: 38px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #11182d;
+}
+
+.subtitle {
+  margin-top: 16px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #7a8192;
+}
+
+.iconWrapper {
+  position: absolute;
+  top: -8px;
+  right: -4px;
+}
+
+.gridSection {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.buttonWrapper {
+  margin-top: 28px;
+}

@@ -1,0 +1,29 @@
+.nav {
+  margin-top: auto;
+  border-top: 1px solid #eef0fb;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 12px 8px 0;
+}
+
+.tabBar {
+  --adm-color-text-secondary: #626b82;
+  --adm-color-primary: #8875ff;
+}
+
+.tabBar :global(.adm-tab-bar-item) {
+  padding: 0;
+}
+
+.tabBar :global(.adm-tab-bar-item-icon) {
+  height: auto;
+}
+
+.tabBar :global(.adm-tab-bar-item-title) {
+  font-size: 11px;
+  font-weight: bold;
+  line-height: inherit;
+}
+
+.tabBar :global(.adm-tab-bar-item-title-with-icon) {
+  margin-top: 4px;
+}

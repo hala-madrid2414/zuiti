@@ -1,3 +1,5 @@
+import styles from "./ResultCard.module.css";
+
 type ResultCardProps = {
   label: string;
   text: string;
@@ -5,23 +7,21 @@ type ResultCardProps = {
 };
 
 const toneClass = {
-  lavender: "bg-[#e9ddff] text-[#5a45ad]",
-  blue: "bg-[#dfeaff] text-[#4365a8]",
-  pink: "bg-[#ffd9f1] text-[#a33f88]",
+  lavender: styles.lavender,
+  blue: styles.blue,
+  pink: styles.pink,
 };
 
 export function ResultCard({ label, text, tone }: ResultCardProps) {
   return (
-    <article className="soft-card px-5 py-4">
-      <span
-        className={`inline-flex rounded-full px-3 py-1 text-[12px] font-black ${toneClass[tone]}`}
-      >
+    <article className={`soft-card ${styles.container}`}>
+      <span className={`${styles.label} ${toneClass[tone]}`}>
         {label}
       </span>
-      <p className="mt-4 whitespace-pre-line text-[15px] font-bold leading-7 text-[#22283a]">
+      <p className={styles.text}>
         {text}
       </p>
-      <div className="mt-5 grid grid-cols-3 gap-2 text-[12px] font-bold text-[#43495e]">
+      <div className={styles.actions}>
         <button type="button" className="result-action">
           <span className="action-icon copy" aria-hidden="true" />
           复制

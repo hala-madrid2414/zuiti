@@ -1,0 +1,22 @@
+.button {
+  --border-width: 0 !important;
+  --padding-default: 0 !important;
+  border: none !important;
+}
+
+.button::before {
+  display: none !important;
+}
+
+.button > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.sparkle {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}

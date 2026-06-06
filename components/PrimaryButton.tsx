@@ -1,5 +1,9 @@
-import Link from "next/link";
+"use client";
+
+import { Button } from "antd-mobile";
+import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
+import styles from "./PrimaryButton.module.css";
 
 type PrimaryButtonProps = {
   href: string;
@@ -12,10 +16,19 @@ export function PrimaryButton({
   children,
   sparkle = false,
 }: PrimaryButtonProps) {
+  const router = useRouter();
+
   return (
-    <Link href={href} className="primary-button">
+    <Button
+      className={`primary-button ${styles.button}`}
+      onClick={() => router.push(href)}
+    >
       <span>{children}</span>
-      {sparkle ? <span aria-hidden="true" className="text-xl">✦</span> : null}
-    </Link>
+      {sparkle ? (
+        <span aria-hidden="true" className={styles.sparkle}>
+          ✦
+        </span>
+      ) : null}
+    </Button>
   );
 }
