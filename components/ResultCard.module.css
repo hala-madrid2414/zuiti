@@ -1,12 +1,13 @@
 .container {
-  padding: 16px 20px;
+  border-radius: 18px;
+  padding: 15px 17px 14px;
 }
 
 .label {
   display: inline-flex;
   border-radius: 9999px;
-  padding: 4px 12px;
-  font-size: 12px;
+  padding: 4px 10px;
+  font-size: 11px;
   font-weight: 900;
 }
 
@@ -26,20 +27,20 @@
 }
 
 .text {
-  margin-top: 16px;
+  margin-top: 14px;
   white-space: pre-line;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
-  line-height: 28px;
+  line-height: 25px;
   color: #22283a;
 }
 
 .actions {
-  margin-top: 20px;
+  margin-top: 17px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   color: #43495e;
 }

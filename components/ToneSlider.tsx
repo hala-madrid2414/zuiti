@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { Slider } from "antd-mobile";
 import stylesCss from "./ToneSlider.module.css";
 
@@ -11,7 +12,17 @@ type ToneSliderProps = {
   dark?: boolean;
 };
 
+type SliderStyle = CSSProperties & {
+  "--fill-color": string;
+  "--track-height": string;
+};
+
 export function ToneSlider({ title, left, right, value, dark = false }: ToneSliderProps) {
+  const sliderStyle: SliderStyle = {
+    "--fill-color": dark ? "#131a32" : "linear-gradient(90deg, #b789f4, #887dff)",
+    "--track-height": "6px",
+  };
+
   return (
     <section className={`soft-card ${stylesCss.container}`}>
       <h2 className={stylesCss.title}>{title}</h2>
@@ -20,10 +31,7 @@ export function ToneSlider({ title, left, right, value, dark = false }: ToneSlid
         <div className={stylesCss.sliderWrapper}>
           <Slider
             value={value}
-            style={{
-              "--fill-color": dark ? "#131a32" : "linear-gradient(90deg, #b789f4, #887dff)",
-              "--track-height": "6px",
-            } as any}
+            style={sliderStyle}
             icon={<div className={`${stylesCss.thumb} ${dark ? stylesCss.thumbDark : ""}`} />}
           />
         </div>

@@ -1,9 +1,9 @@
 .container {
-  padding: 24px 24px;
+  padding: 22px 22px 26px;
 }
 
 .section1 {
-  margin-top: 28px;
+  margin-top: 26px;
 }
 
 .label {
@@ -14,15 +14,19 @@
 
 .textAreaContainer {
   margin-top: 12px;
-  min-height: 128px;
-  padding: 16px 16px;
+  min-height: 222px;
+  padding: 16px 16px 12px;
 }
 
 .textArea {
   --font-size: 14px;
   font-weight: 700;
-  line-height: 24px;
+  line-height: 25px;
   color: #30364a;
+}
+
+.textArea :global(.adm-text-area-element) {
+  min-height: 162px;
 }
 
 .textAreaContainer :global(.adm-text-area-count) {
@@ -33,7 +37,7 @@
 }
 
 .section2 {
-  margin-top: 36px;
+  margin-top: 30px;
 }
 
 .sectionTitle {
@@ -44,13 +48,13 @@
 
 .cardList {
   margin-top: 16px;
-  margin-left: -4px;
-  margin-right: -4px;
+  margin-left: -2px;
+  margin-right: -22px;
   display: flex;
   gap: 12px;
   overflow-x: auto;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: 2px;
+  padding-right: 22px;
   padding-bottom: 12px;
 }
 
@@ -76,6 +80,7 @@
 }
 
 .hint {
+  display: none;
   margin-top: auto;
   text-align: center;
   font-size: 12px;
@@ -84,5 +89,6 @@
 }
 
 .buttonWrapper {
-  margin-top: 28px;
+  margin-top: auto;
+  padding-top: 22px;
 }

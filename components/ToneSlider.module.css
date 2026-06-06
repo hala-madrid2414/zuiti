@@ -1,17 +1,18 @@
 .container {
-  padding: 16px 20px;
+  border-radius: 18px;
+  padding: 15px 18px;
 }
 
 .title {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 900;
 }
 
 .sliderRow {
-  margin-top: 16px;
+  margin-top: 15px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 13px;
 }
 
 .leftLabel {

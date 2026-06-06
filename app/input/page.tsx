@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { TextArea } from "antd-mobile";
 import { MobileShell } from "@/components/MobileShell";
 import { PrimaryButton } from "@/components/PrimaryButton";
@@ -7,6 +8,10 @@ import { StyleCard } from "@/components/StyleCard";
 import { TopBar } from "@/components/TopBar";
 import { styles } from "@/components/content";
 import stylesCss from "./page.module.css";
+
+const textAreaStyle: CSSProperties & { "--color": string } = {
+  "--color": "#30364a",
+};
 
 export default function InputPage() {
   return (
@@ -28,7 +33,7 @@ export default function InputPage() {
             maxLength={300}
             showCount
             rows={4}
-            style={{ '--color': '#30364a' } as any}
+            style={textAreaStyle}
           />
         </div>
       </section>

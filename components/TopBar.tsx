@@ -9,6 +9,7 @@ type TopBarProps = {
 export function TopBar({ title, backHref }: TopBarProps) {
   return (
     <header className={styles.header}>
+      <span className={styles.notch} aria-hidden="true" />
       <div className={styles.statusBar}>
         <span>9:41</span>
         <div className={styles.statusIcons} aria-hidden="true">

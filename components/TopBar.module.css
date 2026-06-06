@@ -1,5 +1,22 @@
+.header {
+  position: relative;
+  flex: none;
+}
+
 .header > * + * {
   margin-top: 20px;
+}
+
+.notch {
+  position: absolute;
+  left: 50%;
+  top: 1px;
+  width: 86px;
+  height: 24px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #c8bde9, #dad6f0);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38);
+  transform: translateX(-50%);
 }
 
 .statusBar {
@@ -7,9 +24,10 @@
   height: 20px;
   align-items: center;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 900;
   color: #15192d;
+  padding: 0 6px;
 }
 
 .statusIcons {
@@ -22,6 +40,7 @@
   display: grid;
   grid-template-columns: 32px 1fr 32px;
   align-items: center;
+  min-height: 28px;
 }
 
 .backButton {
@@ -30,7 +49,7 @@
   height: 32px;
   align-items: center;
   justify-content: flex-start;
-  font-size: 30px;
+  font-size: 34px;
   line-height: 1;
   color: #15192d;
   text-decoration: none;
@@ -38,7 +57,7 @@
 
 .title {
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 900;
   letter-spacing: -0.01em;
   margin: 0;

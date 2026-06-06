@@ -1,11 +1,11 @@
 .container {
-  padding: 24px 24px;
+  padding: 22px 22px 26px;
 }
 
 .previewSection {
   position: relative;
-  margin-top: 28px;
-  min-height: 208px;
+  margin-top: 26px;
+  min-height: 216px;
   overflow: hidden;
   padding: 20px 20px;
 }
@@ -16,7 +16,7 @@
 }
 
 .tagsRow {
-  margin-top: 20px;
+  margin-top: 18px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -41,7 +41,7 @@
 }
 
 .previewText {
-  margin-top: 20px;
+  margin-top: 18px;
   max-width: 220px;
   font-size: 15px;
   font-weight: 700;
@@ -52,11 +52,11 @@
 .iconWrapper {
   position: absolute;
   bottom: 8px;
-  right: 20px;
+  right: 16px;
 }
 
 .sliderContainer {
-  margin-top: 20px;
+  margin-top: 18px;
 }
 
 .sliderContainer > * + * {
@@ -65,5 +65,5 @@
 
 .buttonWrapper {
   margin-top: auto;
-  padding-top: 28px;
+  padding-top: 24px;
 }

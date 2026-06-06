@@ -1,24 +1,25 @@
 .container {
   overflow: hidden;
-  padding: 24px 24px 0;
+  padding: 22px 22px 0;
 }
 
 .heroSection {
   position: relative;
-  margin-top: 48px;
+  margin-top: 42px;
 }
 
 .title {
-  font-size: 38px;
+  font-size: 36px;
   font-weight: 900;
-  line-height: 1;
-  letter-spacing: -0.04em;
+  line-height: 1.04;
+  letter-spacing: 0;
   color: #11182d;
+  text-shadow: 0 10px 20px rgba(30, 32, 58, 0.08);
 }
 
 .subtitle {
-  margin-top: 16px;
-  font-size: 15px;
+  margin-top: 12px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 24px;
   color: #7a8192;
@@ -26,17 +27,17 @@
 
 .iconWrapper {
   position: absolute;
-  top: -8px;
-  right: -4px;
+  top: -4px;
+  right: 6px;
 }
 
 .gridSection {
-  margin-top: 48px;
+  margin-top: 38px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
 
 .buttonWrapper {
-  margin-top: 28px;
+  margin-top: 26px;
 }
