@@ -1,12 +1,18 @@
+"use client";
+
 import { BottomNav } from "@/components/BottomNav";
 import { DecorativeIcon } from "@/components/DecorativeIcon";
 import { MobileShell } from "@/components/MobileShell";
 import { PrimaryButton } from "@/components/PrimaryButton";
 import { SceneCard } from "@/components/SceneCard";
 import { scenes, styles as toneStyles } from "@/components/content";
+import { useExpressionFlowStore } from "@/stores/expression-flow-store";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const setScene = useExpressionFlowStore((state) => state.setScene);
+  const setStyle = useExpressionFlowStore((state) => state.setStyle);
+
   return (
     <MobileShell className={styles.container}>
       <div className={styles.pageContent}>
@@ -43,7 +49,15 @@ export default function Home() {
 
         <section className={styles.gridSection}>
           {scenes.map((scene) => (
-            <SceneCard key={scene.title} {...scene} />
+            <SceneCard
+              key={scene.key}
+              title={scene.title}
+              subtitle={scene.subtitle}
+              href={scene.href}
+              icon={scene.icon}
+              context={scene.context}
+              onClick={() => setScene(scene.key)}
+            />
           ))}
         </section>
 
@@ -66,7 +80,15 @@ export default function Home() {
           <h2>热门风格</h2>
           <div className={styles.hotList}>
             {toneStyles.map((style) => (
-              <a key={style.title} className={styles.hotItem} href="/input">
+              <a
+                key={style.title}
+                className={styles.hotItem}
+                href="/input?scene=work"
+                onClick={() => {
+                  setScene("work");
+                  setStyle(style.key);
+                }}
+              >
                 <DecorativeIcon kind={style.icon} size="sm" />
                 <span>{style.title}</span>
               </a>
@@ -75,7 +97,9 @@ export default function Home() {
         </section>
 
         <div className={styles.buttonWrapper}>
-          <PrimaryButton href="/input" sparkle>开始转换</PrimaryButton>
+          <PrimaryButton href="/input?scene=work" sparkle onClick={() => setScene("work")}>
+            开始转换
+          </PrimaryButton>
         </div>
       </div>
 

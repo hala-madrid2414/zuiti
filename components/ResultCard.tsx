@@ -9,6 +9,10 @@ type ResultCardProps = {
   fit: string;
   tags: readonly string[];
   index?: number;
+  onCopy?: () => void;
+  onUseful?: () => void;
+  onRegenerate?: () => void;
+  onSwitchStyle?: () => void;
 };
 
 const toneClass = {
@@ -35,6 +39,10 @@ export function ResultCard({
   fit,
   tags,
   index = 0,
+  onCopy,
+  onUseful,
+  onRegenerate,
+  onSwitchStyle,
 }: ResultCardProps) {
   const resultStyle: ResultStyle = {
     "--delay": `${index * 90}ms`,
@@ -66,19 +74,19 @@ export function ResultCard({
         ))}
       </div>
       <div className={styles.actions}>
-        <button type="button" className="result-action">
+        <button type="button" className="result-action" onClick={onCopy}>
           <span className="action-icon copy" aria-hidden="true" />
           复制
         </button>
-        <button type="button" className="result-action">
+        <button type="button" className="result-action" onClick={onUseful}>
           <span className="action-icon star" aria-hidden="true" />
-          收藏
+          有用
         </button>
-        <button type="button" className="result-action">
+        <button type="button" className="result-action" onClick={onRegenerate}>
           <span className="action-icon refresh" aria-hidden="true" />
           再润色
         </button>
-        <button type="button" className="result-action">
+        <button type="button" className="result-action" onClick={onSwitchStyle}>
           <span className="action-icon switch" aria-hidden="true" />
           换风格
         </button>

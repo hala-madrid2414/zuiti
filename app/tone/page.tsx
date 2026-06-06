@@ -1,17 +1,24 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { MobileShell } from "@/components/MobileShell";
 import { PrimaryButton } from "@/components/PrimaryButton";
 import { ToneSlider } from "@/components/ToneSlider";
 import { TopBar } from "@/components/TopBar";
+import { defaultSliders, useExpressionFlowStore } from "@/stores/expression-flow-store";
 import styles from "./page.module.css";
 
 export default function TonePage() {
-  const [polite, setPolite] = useState(76);
-  const [formal, setFormal] = useState(58);
-  const [distance, setDistance] = useState(62);
+  const text = useExpressionFlowStore((state) => state.text);
+  const scene = useExpressionFlowStore((state) => state.scene);
+  const sliders = useExpressionFlowStore((state) => state.sliders);
+  const setSlider = useExpressionFlowStore((state) => state.setSlider);
+  const setSliders = useExpressionFlowStore((state) => state.setSliders);
+  const polite = sliders.politeness;
+  const formal = sliders.formality;
+  const distance = sliders.distance;
+  const hasDraft = Boolean(scene && text.trim().length >= 2);
 
   const preview = useMemo(() => {
     if (formal > 72) {
@@ -43,10 +50,23 @@ export default function TonePage() {
         title="语气仪表盘"
         subtitle="微调语气，让表达更贴近你的意图"
         backHref="/input"
-        actions={[{ label: "重置", icon: "reset" }]}
+        actions={[{ label: "重置", icon: "reset", onClick: () => setSliders(defaultSliders) }]}
       />
 
       <div className={styles.content}>
+        {!hasDraft ? (
+          <section className={`soft-card ${styles.previewSection}`}>
+            <div className={styles.previewCopy}>
+              <div className={styles.previewHeader}>
+                <h2 className={styles.previewTitle}>还差一句原话</h2>
+                <span>待补充</span>
+              </div>
+              <p className={styles.previewText}>
+                先回到输入页，选择场景并写下你想表达的真实想法。
+              </p>
+            </div>
+          </section>
+        ) : null}
         <section className={`soft-card ${styles.previewSection}`}>
           <div className={styles.previewCopy}>
             <div className={styles.previewHeader}>
@@ -75,7 +95,7 @@ export default function TonePage() {
             right="礼貌"
             value={polite}
             hint="语气更礼貌，表达更照顾对方感受"
-            onChange={setPolite}
+            onChange={(value) => setSlider("politeness", value)}
           />
           <ToneSlider
             title="正式程度"
@@ -83,7 +103,7 @@ export default function TonePage() {
             right="正式"
             value={formal}
             hint="表达更正式，适合书面或职场场景"
-            onChange={setFormal}
+            onChange={(value) => setSlider("formality", value)}
           />
           <ToneSlider
             title="关系距离"
@@ -91,14 +111,14 @@ export default function TonePage() {
             right="陌生/上级"
             value={distance}
             hint="保持适当距离，表达更得体"
-            onChange={setDistance}
+            onChange={(value) => setSlider("distance", value)}
           />
         </div>
       </div>
 
       <div className={styles.buttonWrapper}>
-        <PrimaryButton href="/results" sparkle>
-          生成结果
+        <PrimaryButton href={hasDraft ? "/results" : "/input"} sparkle>
+          {hasDraft ? "生成结果" : "返回输入"}
         </PrimaryButton>
       </div>
     </MobileShell>

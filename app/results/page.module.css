@@ -101,6 +101,27 @@
   }
 }
 
+.stateCard {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 18px 16px;
+}
+
+.stateCard h2 {
+  margin: 0;
+  font-size: 17px;
+  color: #252c40;
+}
+
+.stateCard p {
+  margin: 0;
+  color: #687189;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 20px;
+}
+
 @media (max-width: 340px) {
   .bottomActions {
     grid-template-columns: 1fr;

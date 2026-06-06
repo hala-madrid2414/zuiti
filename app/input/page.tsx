@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo } from "react";
 import type { CSSProperties } from "react";
 import { TextArea } from "antd-mobile";
 import { useSearchParams } from "next/navigation";
@@ -9,6 +9,8 @@ import { PrimaryButton } from "@/components/PrimaryButton";
 import { StyleCard } from "@/components/StyleCard";
 import { TopBar } from "@/components/TopBar";
 import { scenes, styles } from "@/components/content";
+import { useExpressionFlowStore } from "@/stores/expression-flow-store";
+import { getStyleByIndex, getStyleIndex, isScene } from "@/utils/content-mapping";
 import stylesCss from "./page.module.css";
 
 const textAreaStyle: CSSProperties & { "--color": string } = {
@@ -17,13 +19,26 @@ const textAreaStyle: CSSProperties & { "--color": string } = {
 
 function InputContent() {
   const searchParams = useSearchParams();
-  const [value, setValue] = useState("");
-  const [activeStyle, setActiveStyle] = useState(0);
+  const value = useExpressionFlowStore((state) => state.text);
+  const activeStyle = useExpressionFlowStore((state) => state.style);
+  const setValue = useExpressionFlowStore((state) => state.setText);
+  const setStyle = useExpressionFlowStore((state) => state.setStyle);
+  const storeScene = useExpressionFlowStore((state) => state.scene);
+  const setScene = useExpressionFlowStore((state) => state.setScene);
+
+  useEffect(() => {
+    const sceneKey = searchParams.get("scene");
+    if (isScene(sceneKey)) {
+      setScene(sceneKey);
+    }
+  }, [searchParams, setScene]);
 
   const scene = useMemo(() => {
-    const sceneKey = searchParams.get("scene");
-    return scenes.find((item) => item.href.includes(`scene=${sceneKey}`));
-  }, [searchParams]);
+    const sceneKey = storeScene ?? searchParams.get("scene");
+    return scenes.find((item) => item.key === sceneKey);
+  }, [searchParams, storeScene]);
+
+  const canContinue = value.trim().length >= 2;
 
   return (
     <MobileShell className={stylesCss.container}>
@@ -74,22 +89,30 @@ function InputContent() {
           <div className={stylesCss.cardList}>
             {styles.map((style, index) => (
               <StyleCard
-                key={style.title}
-                {...style}
-                active={index === activeStyle}
-                onClick={() => setActiveStyle(index)}
+                key={style.key}
+                title={style.title}
+                detail={style.detail}
+                icon={style.icon}
+                active={index === getStyleIndex(activeStyle)}
+                onClick={() => setStyle(getStyleByIndex(index))}
               />
             ))}
           </div>
         </section>
 
         <p className={stylesCss.hint}>
-          左右滑动，选择你喜欢的风格
+          {canContinue ? "左右滑动，选择你喜欢的风格" : "先输入至少 2 个字，再继续生成"}
         </p>
         <div className={stylesCss.buttonWrapper}>
-          <PrimaryButton href="/tone" sparkle>
-            开始转换
-          </PrimaryButton>
+          {canContinue ? (
+            <PrimaryButton href="/tone" sparkle>
+              开始转换
+            </PrimaryButton>
+          ) : (
+            <button type="button" className="primary-button" disabled>
+              <span>开始转换</span>
+            </button>
+          )}
         </div>
       </div>
     </MobileShell>

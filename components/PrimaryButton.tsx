@@ -9,19 +9,24 @@ type PrimaryButtonProps = {
   href: string;
   children: ReactNode;
   sparkle?: boolean;
+  onClick?: () => void;
 };
 
 export function PrimaryButton({
   href,
   children,
   sparkle = false,
+  onClick,
 }: PrimaryButtonProps) {
   const router = useRouter();
 
   return (
     <Button
       className={`primary-button ${styles.button}`}
-      onClick={() => router.push(href)}
+      onClick={() => {
+        onClick?.();
+        router.push(href);
+      }}
     >
       <span>{children}</span>
       {sparkle ? (
