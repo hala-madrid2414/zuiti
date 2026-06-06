@@ -2,19 +2,38 @@
   --background: #f3f0ff;
   --foreground: #14182d;
   --muted: #7b849d;
+  --text-secondary: #626b82;
+  --text-tertiary: #9aa2b8;
   --lavender: #9d83f7;
   --blue: #74a4f7;
   --pink: #efc8f0;
   --card: rgba(255, 255, 255, 0.76);
+  --surface-glass-soft: rgba(255, 255, 255, 0.62);
+  --surface-glass: rgba(255, 255, 255, 0.72);
+  --surface-glass-strong: rgba(255, 255, 255, 0.78);
   --hairline: rgba(220, 224, 245, 0.82);
+  --border-subtle: rgba(226, 229, 247, 0.9);
+  --border-strong: rgba(255, 255, 255, 0.8);
+  --radius-md: 16px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
   --shadow-soft: 0 28px 76px rgba(103, 105, 166, 0.18);
   --shadow-card: 0 18px 44px rgba(93, 101, 151, 0.12);
+  --motion-fast: 180ms;
+  --motion-base: 220ms;
+  --motion-breathe: 2600ms;
+  --gradient-primary-button: linear-gradient(100deg, #b485f4 0%, #7f8dff 48%, #5da6f2 100%);
+  --gradient-slider-fill: linear-gradient(90deg, #b789f4, #887dff);
+  --slider-track-bg: #e6e7ee;
+  --slider-thumb-bg: #817ef3;
+  --slider-thumb-bg-dark: #151a32;
   --font-sans: "PingFang SC", "Hiragino Sans GB", "MiSans", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
   --font-display: "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", serif;
 
   /* antd-mobile 样式变量覆盖 */
   --adm-color-primary: #7f8dff;
   --adm-color-text: var(--foreground);
+  --adm-color-text-secondary: var(--text-secondary);
   --adm-color-background: var(--background);
   --adm-color-box: var(--card);
 }
@@ -62,61 +81,9 @@ textarea {
   border: 0;
 }
 
-.mobile-shell {
-  position: relative;
-  display: flex;
-  width: 100%;
-  max-width: 375px;
-  min-height: min(100dvh - 32px, 812px);
-  margin: 0 auto;
-  flex-direction: column;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.82);
-  border-radius: 28px;
-  overflow-y: auto;
-  background:
-    radial-gradient(circle at 78% 12%, rgba(218, 209, 255, 0.62), transparent 24%),
-    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.94), transparent 34%),
-    linear-gradient(160deg, #ffffff 0%, #fbfaff 52%, #f5f7ff 100%);
-  box-shadow:
-    0 34px 90px rgba(91, 99, 153, 0.22),
-    inset 0 0 0 1px rgba(224, 228, 246, 0.72);
-  animation: page-enter 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-.mobile-shell::before,
-.mobile-shell::after {
-  position: absolute;
-  pointer-events: none;
-  content: "";
-}
-
-.mobile-shell::before {
-  left: 48px;
-  top: 150px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 34% 28%, #ffffff, #d9c9ff 70%);
-  opacity: 0.78;
-}
-
-.mobile-shell::after {
-  right: 38px;
-  top: 210px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #a8a2ff;
-  box-shadow:
-    -210px 54px 0 rgba(158, 147, 255, 0.5),
-    -162px -30px 0 rgba(214, 202, 255, 0.7);
-  opacity: 0.7;
-}
-
 .soft-card {
   border: 1px solid var(--hairline);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   background: var(--card);
   box-shadow:
     var(--shadow-card),
@@ -132,8 +99,8 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  border-radius: 999px;
-  background: linear-gradient(100deg, #b485f4 0%, #7f8dff 48%, #5da6f2 100%);
+  border-radius: var(--radius-pill);
+  background: var(--gradient-primary-button);
   color: white;
   font-size: 14px;
   font-weight: 900;
@@ -144,9 +111,9 @@ textarea {
     inset 0 -10px 22px rgba(81, 122, 229, 0.18);
   overflow: hidden;
   transition:
-    filter 180ms ease,
-    transform 180ms ease;
-  animation: cta-breathe 2600ms ease-in-out infinite;
+    filter var(--motion-fast) ease,
+    transform var(--motion-fast) ease;
+  animation: cta-breathe var(--motion-breathe) ease-in-out infinite;
 }
 
 .primary-button,
@@ -161,7 +128,7 @@ textarea {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.48), transparent);
   content: "";
   transform: rotate(18deg);
-  animation: button-sheen 2600ms ease-in-out infinite;
+  animation: button-sheen var(--motion-breathe) ease-in-out infinite;
 }
 
 .primary-button:hover,
@@ -179,8 +146,8 @@ textarea {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.76), rgba(246, 247, 255, 0.44));
   padding: 9px 5px 8px;
@@ -192,7 +159,7 @@ textarea {
     inset 0 1px 0 rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(22px);
   transition:
-    border-color 220ms ease,
+    border-color var(--motion-base) ease,
     box-shadow 200ms ease,
     transform 200ms ease;
   animation: card-float 4600ms ease-in-out infinite;
@@ -241,17 +208,17 @@ textarea {
   color: #252c40;
   box-shadow: var(--shadow-card);
   transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    background 180ms ease,
-    transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease,
+    background var(--motion-fast) ease,
+    transform var(--motion-base) cubic-bezier(0.2, 0.8, 0.2, 1);
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
 
 .style-card .zuiti-icon {
   transform: scale(0.76);
-  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform var(--motion-base) cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .style-card.active,
@@ -292,16 +259,8 @@ textarea {
   opacity: 0;
   transform: translateY(8px);
   transition:
-    opacity 180ms ease,
-    transform 180ms ease;
-}
-
-@media (max-width: 430px) {
-  .mobile-shell {
-    min-height: 100dvh;
-    border: 0;
-    border-radius: 0;
-  }
+    opacity var(--motion-fast) ease,
+    transform var(--motion-fast) ease;
 }
 
 .style-card:hover .style-tip,
@@ -315,8 +274,8 @@ textarea {
   position: relative;
   height: 6px;
   flex: 1;
-  border-radius: 999px;
-  background: #e6e7ee;
+  border-radius: var(--radius-pill);
+  background: var(--slider-track-bg);
 }
 
 .slider-fill {
@@ -324,7 +283,7 @@ textarea {
   inset-block: 0;
   left: 0;
   border-radius: inherit;
-  background: linear-gradient(90deg, #b789f4, #887dff);
+  background: var(--gradient-slider-fill);
 }
 
 .slider-fill.dark {
@@ -338,95 +297,14 @@ textarea {
   width: 22px;
   height: 22px;
   border: 5px solid white;
-  border-radius: 999px;
-  background: #817ef3;
+  border-radius: var(--radius-pill);
+  background: var(--slider-thumb-bg);
   box-shadow: 0 5px 14px rgba(76, 82, 129, 0.26);
   transform: translate(-50%, -50%);
 }
 
 .slider-thumb.dark {
-  background: #151a32;
-}
-
-.signal-bars {
-  display: flex;
-  height: 12px;
-  align-items: end;
-  gap: 2px;
-}
-
-.signal-bars i {
-  display: block;
-  width: 3px;
-  border-radius: 2px;
-  background: #11182d;
-}
-
-.signal-bars i:nth-child(1) {
-  height: 5px;
-}
-
-.signal-bars i:nth-child(2) {
-  height: 8px;
-}
-
-.signal-bars i:nth-child(3) {
-  height: 11px;
-}
-
-.wifi-mark {
-  position: relative;
-  width: 14px;
-  height: 10px;
-  overflow: hidden;
-}
-
-.wifi-mark::before {
-  position: absolute;
-  inset: 1px 1px auto;
-  height: 14px;
-  border: 3px solid #11182d;
-  border-bottom: 0;
-  border-radius: 999px 999px 0 0;
-  content: "";
-}
-
-.wifi-mark::after {
-  position: absolute;
-  bottom: 0;
-  left: 6px;
-  width: 3px;
-  height: 3px;
-  border-radius: 999px;
-  background: #11182d;
-  content: "";
-}
-
-.battery-mark {
-  position: relative;
-  width: 20px;
-  height: 10px;
-  border: 2px solid #11182d;
-  border-radius: 3px;
-}
-
-.battery-mark::before {
-  position: absolute;
-  right: -4px;
-  top: 2px;
-  width: 2px;
-  height: 4px;
-  border-radius: 0 2px 2px 0;
-  background: #11182d;
-  content: "";
-}
-
-.battery-mark::after {
-  position: absolute;
-  inset: 2px;
-  border-radius: 1px;
-  background: #11182d;
-  content: "";
+  background: var(--slider-thumb-bg-dark);
 }
 
 .zuiti-icon {

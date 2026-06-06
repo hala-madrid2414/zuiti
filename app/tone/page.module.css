@@ -1,21 +1,29 @@
 .container {
-  position: relative;
-  padding: 15px 18px 24px;
+  display: flex;
+  min-height: 100%;
+  flex: 1;
+  flex-direction: column;
+  padding: 15px 18px calc(18px + env(safe-area-inset-bottom));
+}
+
+.content {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .backgroundRadar {
   position: absolute;
-  top: 58px;
-  right: 42px;
-  width: 148px;
-  height: 128px;
+  inset: 0;
   pointer-events: none;
   z-index: 0;
 }
 
 .backgroundRadar::before {
   position: absolute;
-  inset: 18px 4px 10px 16px;
+  inset: 14% 4% 10% 12%;
   border: 1px solid rgba(147, 137, 245, 0.18);
   border-radius: 42% 58% 55% 45%;
   background:
@@ -27,10 +35,10 @@
 
 .backgroundRadar::after {
   position: absolute;
-  left: 46px;
-  top: 16px;
-  width: 92px;
-  height: 92px;
+  left: 34%;
+  top: 12%;
+  width: 64%;
+  height: 64%;
   border: 1px solid rgba(147, 137, 245, 0.12);
   border-radius: 50%;
   content: "";
@@ -46,35 +54,44 @@
 }
 
 .backgroundRadar span:nth-child(1) {
-  right: 20px;
-  top: 20px;
+  right: 12%;
+  top: 14%;
 }
 
 .backgroundRadar span:nth-child(2) {
-  left: 26px;
-  bottom: 22px;
+  left: 16%;
+  bottom: 18%;
 }
 
 .backgroundRadar span:nth-child(3) {
-  right: 42px;
-  bottom: 18px;
+  right: 28%;
+  bottom: 14%;
   width: 4px;
   height: 4px;
 }
 
 .previewSection {
-  position: relative;
-  margin-top: 24px;
-  min-height: 128px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(108px, 35%, 144px);
+  align-items: stretch;
+  gap: 12px;
+  min-height: 152px;
   overflow: hidden;
-  padding: 15px 16px;
+  padding: 16px;
   z-index: 1;
+}
+
+.previewCopy {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
 }
 
 .previewHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
 }
 
 .previewTitle {
@@ -85,6 +102,7 @@
 }
 
 .previewHeader span {
+  flex: none;
   border-radius: 999px;
   background: rgba(137, 139, 255, 0.1);
   padding: 4px 8px;
@@ -93,13 +111,18 @@
   color: #8b84ef;
 }
 
+.previewVisual {
+  position: relative;
+  min-height: 108px;
+}
+
 .liveDot {
   position: absolute;
-  right: calc(124px - var(--x) * 0.38);
-  top: calc(8px + var(--y) * 0.32);
+  left: clamp(14px, calc(18px + var(--x) * 0.62), calc(100% - 18px));
+  top: clamp(10px, calc(14px + var(--y) * 0.56), calc(100% - 18px));
   width: 7px;
   height: 7px;
-  z-index: 0;
+  z-index: 1;
   border-radius: 50%;
   background: #8b86ff;
   box-shadow: 0 0 0 5px rgba(139, 134, 255, 0.16);
@@ -108,10 +131,7 @@
 }
 
 .previewText {
-  position: relative;
-  z-index: 1;
   margin-top: 12px;
-  max-width: 290px;
   font-size: 12px;
   font-weight: 800;
   line-height: 21px;
@@ -121,8 +141,8 @@
 
 .previewSpark {
   position: absolute;
-  right: 26px;
-  bottom: 20px;
+  right: 8px;
+  bottom: 10px;
   width: 14px;
   height: 14px;
 }
@@ -151,14 +171,48 @@
 }
 
 .sliderContainer {
-  margin-top: 14px;
-}
-
-.sliderContainer > * + * {
-  margin-top: 10px;
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .buttonWrapper {
   margin-top: auto;
-  padding: 18px 30px 0;
+  padding: 18px 30px 4px;
+}
+
+@media (max-height: 760px) {
+  .container {
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .content {
+    gap: 12px;
+  }
+
+  .previewSection {
+    min-height: 144px;
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .buttonWrapper {
+    padding-top: 14px;
+  }
+}
+
+@media (max-width: 340px) {
+  .previewSection {
+    grid-template-columns: 1fr;
+  }
+
+  .previewVisual {
+    min-height: 92px;
+  }
+
+  .buttonWrapper {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
 }

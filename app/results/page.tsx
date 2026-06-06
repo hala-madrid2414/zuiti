@@ -18,21 +18,23 @@ export default function ResultsPage() {
         ]}
       />
 
-      <section className={`soft-card ${styles.originalCard}`}>
-        <span>原话</span>
-        <p>这个话不是我负责的，别老找我。</p>
-      </section>
+      <div className={styles.content}>
+        <section className={`soft-card ${styles.originalCard}`}>
+          <span>原话</span>
+          <p>这个话不是我负责的，别老找我。</p>
+        </section>
 
-      <section className={styles.resultsList}>
-        {results.map((result, index) => (
-          <ResultCard key={result.label} {...result} index={index} />
-        ))}
-      </section>
+        <section className={styles.resultsList}>
+          {results.map((result, index) => (
+            <ResultCard key={result.label} {...result} index={index} />
+          ))}
+        </section>
 
-      <button type="button" className={styles.compareButton}>
-        <span aria-hidden="true" />
-        查看“原话 → 优化版”的变化点
-      </button>
+        <button type="button" className={styles.compareButton}>
+          <span aria-hidden="true" />
+          查看“原话 → 优化版”的变化点
+        </button>
+      </div>
 
       <div className={styles.bottomActions}>
         <a href="/tone" className={styles.secondaryButton}>

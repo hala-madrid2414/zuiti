@@ -8,8 +8,8 @@ type MobileShellProps = {
 
 export function MobileShell({ children, className = "" }: MobileShellProps) {
   return (
-    <main className={styles.main}>
-      <section className={`mobile-shell ${className}`}>{children}</section>
+    <main className={`${styles.main} ${className}`.trim()}>
+      {children}
     </main>
   );
 }

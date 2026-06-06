@@ -1,5 +1,16 @@
 .container {
-  padding: 15px 18px 24px;
+  display: flex;
+  min-height: 100%;
+  flex: 1;
+  flex-direction: column;
+  padding: 15px 18px calc(18px + env(safe-area-inset-bottom));
+}
+
+.content {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
 }
 
 .originalCard {
@@ -26,13 +37,12 @@
 }
 
 .resultsList {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  gap: 9px;
   margin-top: 10px;
-  overflow-y: auto;
-  padding-bottom: 4px;
-}
-
-.resultsList > * + * {
-  margin-top: 9px;
+  padding-bottom: 6px;
 }
 
 .compareButton {
@@ -63,7 +73,7 @@
   grid-template-columns: 0.88fr 1.18fr;
   gap: 12px;
   margin-top: auto;
-  padding-top: 13px;
+  padding-top: 14px;
 }
 
 .secondaryButton {
@@ -78,4 +88,21 @@
   font-weight: 900;
   text-decoration: none;
   box-shadow: 0 14px 28px rgba(97, 104, 154, 0.1);
+}
+
+@media (max-height: 760px) {
+  .container {
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .bottomActions {
+    gap: 10px;
+    padding-top: 12px;
+  }
+}
+
+@media (max-width: 340px) {
+  .bottomActions {
+    grid-template-columns: 1fr;
+  }
 }

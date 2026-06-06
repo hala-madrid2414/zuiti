@@ -1,22 +1,46 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
   overflow: hidden;
-  padding: 15px 18px 0;
+  padding: 16px 18px 0;
+}
+
+.pageContent {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.topLabel {
+  min-width: 0;
+  color: #9ca4b9;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
 }
 
 .heroSection {
   position: relative;
-  margin-top: 26px;
-  min-height: 238px;
+  display: grid;
+  gap: 10px;
+  padding-top: 6px;
 }
 
 .profileButton {
-  position: absolute;
-  right: 17px;
-  top: 54px;
-  z-index: 4;
   display: grid;
   width: 32px;
   height: 32px;
+  flex: none;
   place-items: center;
   border: 1px solid rgba(227, 229, 249, 0.85);
   border-radius: 999px;
@@ -125,11 +149,9 @@
 }
 
 .iconWrapper {
-  position: absolute;
-  left: 5px;
-  right: 5px;
-  top: 98px;
-  height: 132px;
+  position: relative;
+  height: 138px;
+  margin: 0 4px;
   pointer-events: none;
   border-radius: 30px;
   background:
@@ -168,10 +190,10 @@
 
 .iconWrapper :global(.zuiti-icon-spark) {
   position: absolute;
-  left: 96px;
+  left: 50%;
   top: -2px;
   z-index: 2;
-  transform: scale(1.14) rotate(6deg);
+  transform: translateX(-34%) scale(1.14) rotate(6deg);
   animation: hero-bubble 4300ms ease-in-out infinite;
 }
 
@@ -207,7 +229,7 @@
 
 .blueRing {
   position: absolute;
-  left: 186px;
+  left: calc(50% + 26px);
   top: 66px;
   width: 64px;
   height: 42px;
@@ -256,9 +278,6 @@
 }
 
 .gridSection {
-  position: relative;
-  z-index: 3;
-  margin-top: -4px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 9px;
@@ -271,10 +290,6 @@
     0 22px 54px rgba(101, 110, 168, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.84);
   backdrop-filter: blur(22px);
-}
-
-.recentSection {
-  margin-top: 12px;
 }
 
 .sectionHeader,
@@ -331,15 +346,15 @@
 }
 
 .hotSection {
-  margin-top: 12px;
+  display: grid;
+  gap: 9px;
 }
 
 .hotList {
-  margin: 9px -18px 0 0;
   display: flex;
   gap: 7px;
   overflow-x: auto;
-  padding: 0 18px 8px 0;
+  padding: 0 2px 6px 0;
   scroll-snap-type: x mandatory;
 }
 
@@ -370,7 +385,7 @@
 
 .buttonWrapper {
   position: relative;
-  margin: 6px 44px 0;
+  margin: auto 26px 12px;
   padding: 3px;
   border-radius: 999px;
   background:

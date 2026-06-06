@@ -39,11 +39,6 @@ export default function TonePage() {
 
   return (
     <MobileShell className={styles.container}>
-      <div className={styles.backgroundRadar} aria-hidden="true">
-        <span />
-        <span />
-        <span />
-      </div>
       <TopBar
         title="语气仪表盘"
         subtitle="微调语气，让表达更贴近你的意图"
@@ -51,43 +46,54 @@ export default function TonePage() {
         actions={[{ label: "重置", icon: "reset" }]}
       />
 
-      <section className={`soft-card ${styles.previewSection}`}>
-        <span className={styles.liveDot} style={radarDotStyle} aria-hidden="true" />
-        <div className={styles.previewHeader}>
-          <h2 className={styles.previewTitle}>表达预览</h2>
-          <span>实时预览</span>
-        </div>
-        <p className={styles.previewText}>
-          {preview}
-        </p>
-        <span className={styles.previewSpark} aria-hidden="true" />
-      </section>
+      <div className={styles.content}>
+        <section className={`soft-card ${styles.previewSection}`}>
+          <div className={styles.previewCopy}>
+            <div className={styles.previewHeader}>
+              <h2 className={styles.previewTitle}>表达预览</h2>
+              <span>实时预览</span>
+            </div>
+            <p className={styles.previewText}>
+              {preview}
+            </p>
+          </div>
+          <div className={styles.previewVisual}>
+            <div className={styles.backgroundRadar} aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
+            <span className={styles.liveDot} style={radarDotStyle} aria-hidden="true" />
+            <span className={styles.previewSpark} aria-hidden="true" />
+          </div>
+        </section>
 
-      <div className={styles.sliderContainer}>
-        <ToneSlider
-          title="礼貌程度"
-          left="直接"
-          right="礼貌"
-          value={polite}
-          hint="语气更礼貌，表达更照顾对方感受"
-          onChange={setPolite}
-        />
-        <ToneSlider
-          title="正式程度"
-          left="日常"
-          right="正式"
-          value={formal}
-          hint="表达更正式，适合书面或职场场景"
-          onChange={setFormal}
-        />
-        <ToneSlider
-          title="关系距离"
-          left="熟人"
-          right="陌生/上级"
-          value={distance}
-          hint="保持适当距离，表达更得体"
-          onChange={setDistance}
-        />
+        <div className={styles.sliderContainer}>
+          <ToneSlider
+            title="礼貌程度"
+            left="直接"
+            right="礼貌"
+            value={polite}
+            hint="语气更礼貌，表达更照顾对方感受"
+            onChange={setPolite}
+          />
+          <ToneSlider
+            title="正式程度"
+            left="日常"
+            right="正式"
+            value={formal}
+            hint="表达更正式，适合书面或职场场景"
+            onChange={setFormal}
+          />
+          <ToneSlider
+            title="关系距离"
+            left="熟人"
+            right="陌生/上级"
+            value={distance}
+            hint="保持适当距离，表达更得体"
+            onChange={setDistance}
+          />
+        </div>
       </div>
 
       <div className={styles.buttonWrapper}>

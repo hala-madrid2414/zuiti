@@ -1,9 +1,19 @@
 .container {
-  padding: 15px 18px 24px;
+  min-height: inherit;
+  padding: 16px 18px 24px;
+}
+
+.pageContent {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .section1 {
-  margin-top: 18px;
+  display: grid;
+  gap: 12px;
 }
 
 .labelRow,
@@ -30,7 +40,6 @@
 }
 
 .textAreaContainer {
-  margin-top: 12px;
   min-height: 218px;
   padding: 15px 16px 10px;
   transition:
@@ -69,16 +78,12 @@
 }
 
 .section2 {
-  position: relative;
-  margin-top: 20px;
-  min-height: 286px;
+  display: grid;
+  gap: 12px;
 }
 
 .sectionTitleRow {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 118px;
+  align-items: center;
 }
 
 .sectionTitle {
@@ -89,18 +94,11 @@
 }
 
 .cardList {
-  position: absolute;
-  left: -4px;
-  right: -18px;
-  top: 150px;
-  margin-top: 0;
-  margin-left: 0;
-  margin-right: 0;
   display: flex;
   gap: 10px;
   overflow-x: auto;
   overflow-y: visible;
-  padding: 8px 56px 20px 4px;
+  padding: 8px 28px 20px 4px;
   scroll-padding-left: 4px;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
@@ -110,7 +108,7 @@
 .cardList::after {
   position: absolute;
   left: 0;
-  right: 56px;
+  right: 28px;
   bottom: 0;
   height: 52px;
   z-index: -1;
@@ -125,17 +123,16 @@
 }
 
 .hint {
-  display: none;
-  margin-top: auto;
+  margin: 0;
   text-align: center;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   color: #7d8496;
 }
 
 .buttonWrapper {
   margin-top: auto;
-  padding: 18px 4px 0;
+  padding: 0 4px;
 }
 
 .buttonWrapper::after {

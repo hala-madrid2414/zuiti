@@ -3,35 +3,11 @@
   flex: none;
 }
 
-.header > * + * {
-  margin-top: 20px;
-}
-
-.notch {
-  display: none;
-}
-
-.statusBar {
-  display: flex;
-  height: 20px;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-  font-weight: 900;
-  color: #15192d;
-  padding: 0 2px;
-}
-
-.statusIcons {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
 .navBar {
   display: grid;
-  grid-template-columns: 32px 1fr auto;
-  align-items: start;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 10px;
   min-height: 28px;
 }
 
@@ -72,12 +48,14 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  flex-wrap: wrap;
   gap: 7px;
 }
 
 .actionButton {
   display: inline-flex;
   min-height: 28px;
+  min-width: 0;
   align-items: center;
   gap: 4px;
   border: 1px solid rgba(226, 229, 247, 0.9);

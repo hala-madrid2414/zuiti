@@ -15,20 +15,6 @@ type TopBarProps = {
 export function TopBar({ title, backHref, subtitle, actions = [] }: TopBarProps) {
   return (
     <header className={styles.header}>
-      <span className={styles.notch} aria-hidden="true" />
-      <div className={styles.statusBar}>
-        <span>9:41</span>
-        <div className={styles.statusIcons} aria-hidden="true">
-          <span className="signal-bars">
-            <i />
-            <i />
-            <i />
-          </span>
-          <span className="wifi-mark" />
-          <span className="battery-mark" />
-        </div>
-      </div>
-
       {title ? (
         <div className={styles.navBar}>
           {backHref ? (

@@ -147,8 +147,8 @@
 .tags {
   margin-top: 9px;
   display: flex;
+  flex-wrap: wrap;
   gap: 5px;
-  overflow: hidden;
 }
 
 .tags span {
@@ -165,7 +165,8 @@
 .actions {
   margin-top: 10px;
   display: flex;
-  justify-content: flex-end;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   gap: 12px;
   font-size: 10px;
   font-weight: 700;
