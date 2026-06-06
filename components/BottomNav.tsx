@@ -5,8 +5,8 @@ import styles from "./BottomNav.module.css";
 
 const navItems = [
   { key: "home", label: "首页", icon: "home" },
-  { key: "note", label: "记录", icon: "note" },
-  { key: "meter", label: "语气仪表盘", icon: "meter" },
+  { key: "note", label: "历史", icon: "note" },
+  { key: "meter", label: "语气", icon: "meter" },
   { key: "user", label: "我的", icon: "user" },
 ];
 

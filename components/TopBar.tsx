@@ -4,9 +4,15 @@ import styles from "./TopBar.module.css";
 type TopBarProps = {
   title?: string;
   backHref?: string;
+  subtitle?: string;
+  actions?: Array<{
+    label: string;
+    icon?: "spark" | "trash" | "star" | "share" | "reset";
+    onClick?: () => void;
+  }>;
 };
 
-export function TopBar({ title, backHref }: TopBarProps) {
+export function TopBar({ title, backHref, subtitle, actions = [] }: TopBarProps) {
   return (
     <header className={styles.header}>
       <span className={styles.notch} aria-hidden="true" />
@@ -36,8 +42,26 @@ export function TopBar({ title, backHref }: TopBarProps) {
           ) : (
             <span />
           )}
-          <h1 className={styles.title}>{title}</h1>
-          <span />
+          <div className={styles.titleGroup}>
+            <h1 className={styles.title}>{title}</h1>
+            {subtitle ? <p className={styles.subtitle}>{subtitle}</p> : null}
+          </div>
+          <div className={styles.actions}>
+            {actions.map((action) => (
+              <button
+                key={action.label}
+                type="button"
+                className={styles.actionButton}
+                aria-label={action.label}
+                onClick={action.onClick}
+              >
+                {action.icon ? (
+                  <span className={`${styles.actionIcon} ${styles[action.icon]}`} aria-hidden="true" />
+                ) : null}
+                <span>{action.label}</span>
+              </button>
+            ))}
+          </div>
         </div>
       ) : null}
     </header>

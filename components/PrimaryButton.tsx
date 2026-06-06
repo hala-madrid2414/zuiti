@@ -25,9 +25,7 @@ export function PrimaryButton({
     >
       <span>{children}</span>
       {sparkle ? (
-        <span aria-hidden="true" className={styles.sparkle}>
-          ✦
-        </span>
+        <span aria-hidden="true" className={styles.sparkle} />
       ) : null}
     </Button>
   );

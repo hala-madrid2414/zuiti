@@ -1,10 +1,10 @@
 .main {
   position: relative;
   width: 100%;
-  max-width: 430px;
+  max-width: 407px;
   min-height: 100dvh;
   margin: 0 auto;
-  padding: 18px 14px;
+  padding: 10px 16px;
   overflow-x: hidden;
 
   background:
@@ -15,48 +15,8 @@
   color: #182039;
 }
 
-.colorSwatches {
-  position: fixed;
-  left: max(14px, calc(50vw - 206px));
-  top: 10px;
-  z-index: 4;
-  display: flex;
-  gap: 16px;
-  pointer-events: none;
-}
-
-.colorSwatches span {
-  width: 42px;
-  height: 42px;
-  border: 5px solid rgba(255, 255, 255, 0.92);
-  border-radius: 13px;
-  box-shadow:
-    0 10px 24px rgba(122, 118, 188, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.55);
-}
-
-.colorSwatches span:nth-child(1) {
-  background: linear-gradient(145deg, #8eb7ff, #6ca1ef);
-}
-
-.colorSwatches span:nth-child(2) {
-  background: linear-gradient(145deg, #e9d7ff, #c8b0ef);
-}
-
-.colorSwatches span:nth-child(3) {
-  background: linear-gradient(145deg, #f1f2f0, #d5d7d4);
-}
-
-.colorSwatches span:nth-child(4) {
-  background: linear-gradient(145deg, #ffffff, #f6f4f1);
-}
-
 @media (max-width: 430px) {
   .main {
     padding: 0;
-  }
-
-  .colorSwatches {
-    display: none;
   }
 }

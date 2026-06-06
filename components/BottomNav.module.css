@@ -1,8 +1,9 @@
 .nav {
   margin-top: auto;
-  border-top: 1px solid #eef0fb;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px 8px 2px;
+  border-top: 1px solid rgba(232, 235, 250, 0.86);
+  background-color: rgba(255, 255, 255, 0.62);
+  padding: 9px 8px 4px;
+  backdrop-filter: blur(18px);
 }
 
 .tabBar {

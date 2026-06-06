@@ -9,12 +9,6 @@ type MobileShellProps = {
 export function MobileShell({ children, className = "" }: MobileShellProps) {
   return (
     <main className={styles.main}>
-      <div className={styles.colorSwatches} aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
       <section className={`mobile-shell ${className}`}>{children}</section>
     </main>
   );

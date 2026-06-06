@@ -1,5 +1,11 @@
 .title {
-  font-size: 12px;
+  margin-top: 4px;
+  font-size: 8px;
   font-weight: 900;
-  line-height: 1.2;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.detail {
+  display: none;
 }

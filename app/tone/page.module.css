@@ -1,69 +1,164 @@
 .container {
-  padding: 22px 22px 26px;
+  position: relative;
+  padding: 15px 18px 24px;
+}
+
+.backgroundRadar {
+  position: absolute;
+  top: 58px;
+  right: 42px;
+  width: 148px;
+  height: 128px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.backgroundRadar::before {
+  position: absolute;
+  inset: 18px 4px 10px 16px;
+  border: 1px solid rgba(147, 137, 245, 0.18);
+  border-radius: 42% 58% 55% 45%;
+  background:
+    radial-gradient(circle at 58% 52%, rgba(177, 156, 255, 0.24), transparent 42%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.26), rgba(180, 184, 255, 0.12));
+  content: "";
+  transform: rotate(14deg);
+}
+
+.backgroundRadar::after {
+  position: absolute;
+  left: 46px;
+  top: 16px;
+  width: 92px;
+  height: 92px;
+  border: 1px solid rgba(147, 137, 245, 0.12);
+  border-radius: 50%;
+  content: "";
+}
+
+.backgroundRadar span {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #8f8aff;
+  box-shadow: 0 0 0 5px rgba(143, 138, 255, 0.12);
+}
+
+.backgroundRadar span:nth-child(1) {
+  right: 20px;
+  top: 20px;
+}
+
+.backgroundRadar span:nth-child(2) {
+  left: 26px;
+  bottom: 22px;
+}
+
+.backgroundRadar span:nth-child(3) {
+  right: 42px;
+  bottom: 18px;
+  width: 4px;
+  height: 4px;
 }
 
 .previewSection {
   position: relative;
-  margin-top: 26px;
-  min-height: 216px;
+  margin-top: 24px;
+  min-height: 128px;
   overflow: hidden;
-  padding: 20px 20px;
+  padding: 15px 16px;
+  z-index: 1;
+}
+
+.previewHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .previewTitle {
-  font-size: 16px;
-  font-weight: 900;
-}
-
-.tagsRow {
-  margin-top: 18px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.tagPrimary {
-  border-radius: 9999px;
-  background-color: #eadfff;
-  padding: 4px 12px;
+  margin: 0;
   font-size: 12px;
   font-weight: 900;
-  color: #624cb1;
+  color: #7167d8;
 }
 
-.tagSecondary {
-  border-radius: 9999px;
-  background-color: #f0f1fa;
-  padding: 4px 12px;
-  font-size: 12px;
+.previewHeader span {
+  border-radius: 999px;
+  background: rgba(137, 139, 255, 0.1);
+  padding: 4px 8px;
+  font-size: 9px;
   font-weight: 900;
-  color: #6b7287;
+  color: #8b84ef;
+}
+
+.liveDot {
+  position: absolute;
+  right: calc(124px - var(--x) * 0.38);
+  top: calc(8px + var(--y) * 0.32);
+  width: 7px;
+  height: 7px;
+  z-index: 0;
+  border-radius: 50%;
+  background: #8b86ff;
+  box-shadow: 0 0 0 5px rgba(139, 134, 255, 0.16);
+  opacity: 0.8;
+  transition: all 220ms ease;
 }
 
 .previewText {
-  margin-top: 18px;
-  max-width: 220px;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 28px;
+  position: relative;
+  z-index: 1;
+  margin-top: 12px;
+  max-width: 290px;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 21px;
   color: #252b3f;
+  transition: opacity 180ms ease;
 }
 
-.iconWrapper {
+.previewSpark {
   position: absolute;
-  bottom: 8px;
-  right: 16px;
+  right: 26px;
+  bottom: 20px;
+  width: 14px;
+  height: 14px;
+}
+
+.previewSpark::before,
+.previewSpark::after {
+  position: absolute;
+  background: #89a1ff;
+  content: "";
+}
+
+.previewSpark::before {
+  left: 6px;
+  top: 0;
+  width: 2px;
+  height: 14px;
+  border-radius: 999px;
+}
+
+.previewSpark::after {
+  left: 0;
+  top: 6px;
+  width: 14px;
+  height: 2px;
+  border-radius: 999px;
 }
 
 .sliderContainer {
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 .sliderContainer > * + * {
-  margin-top: 16px;
+  margin-top: 10px;
 }
 
 .buttonWrapper {
   margin-top: auto;
-  padding-top: 24px;
+  padding: 18px 30px 0;
 }

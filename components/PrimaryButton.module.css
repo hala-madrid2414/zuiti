@@ -2,6 +2,7 @@
   --border-width: 0 !important;
   --padding-default: 0 !important;
   border: none !important;
+  border-radius: 999px !important;
 }
 
 .button::before {
@@ -17,6 +18,31 @@
 }
 
 .sparkle {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.sparkle::before,
+.sparkle::after {
+  position: absolute;
+  content: "";
+  background: currentColor;
+}
+
+.sparkle::before {
+  left: 7px;
+  top: 1px;
+  width: 2px;
+  height: 14px;
+  border-radius: 999px;
+}
+
+.sparkle::after {
+  left: 1px;
+  top: 7px;
+  width: 14px;
+  height: 2px;
+  border-radius: 999px;
 }

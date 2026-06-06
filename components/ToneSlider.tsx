@@ -10,6 +10,8 @@ type ToneSliderProps = {
   right: string;
   value: number;
   dark?: boolean;
+  hint?: string;
+  onChange?: (value: number) => void;
 };
 
 type SliderStyle = CSSProperties & {
@@ -17,20 +19,51 @@ type SliderStyle = CSSProperties & {
   "--track-height": string;
 };
 
-export function ToneSlider({ title, left, right, value, dark = false }: ToneSliderProps) {
+type VisualTrackStyle = CSSProperties & {
+  "--value": string;
+  "--visual-height": string;
+};
+
+export function ToneSlider({
+  title,
+  left,
+  right,
+  value,
+  dark = false,
+  hint,
+  onChange,
+}: ToneSliderProps) {
   const sliderStyle: SliderStyle = {
-    "--fill-color": dark ? "#131a32" : "linear-gradient(90deg, #b789f4, #887dff)",
-    "--track-height": "6px",
+    "--fill-color": "transparent",
+    "--track-height": "22px",
+  };
+
+  const visualTrackStyle: VisualTrackStyle = {
+    "--value": `${value}%`,
+    "--visual-height": `${3 + value * 0.055}px`,
   };
 
   return (
     <section className={`soft-card ${stylesCss.container}`}>
-      <h2 className={stylesCss.title}>{title}</h2>
+      <div className={stylesCss.header}>
+        <h2 className={stylesCss.title}>{title}</h2>
+        <span className={stylesCss.value}>{value}%</span>
+      </div>
       <div className={stylesCss.sliderRow}>
         <span className={stylesCss.leftLabel}>{left}</span>
         <div className={stylesCss.sliderWrapper}>
+          <div
+            className={`${stylesCss.visualTrack} ${dark ? stylesCss.visualTrackDark : ""}`}
+            style={visualTrackStyle}
+            aria-hidden="true"
+          />
           <Slider
             value={value}
+            onChange={(nextValue) => {
+              if (typeof nextValue === "number") {
+                onChange?.(nextValue);
+              }
+            }}
             style={sliderStyle}
             icon={<div className={`${stylesCss.thumb} ${dark ? stylesCss.thumbDark : ""}`} />}
           />
@@ -39,6 +72,7 @@ export function ToneSlider({ title, left, right, value, dark = false }: ToneSlid
           {right}
         </span>
       </div>
+      {hint ? <p className={stylesCss.hint}>{hint}</p> : null}
     </section>
   );
 }

@@ -6,28 +6,37 @@ export type IconKind =
   | "redirect"
   | "bell"
   | "translate"
-  | "spark";
+  | "spark"
+  | "contrast";
 
 export const scenes = [
   {
     title: "学生沟通",
-    href: "/input",
+    subtitle: "与老师同学",
+    href: "/input?scene=student",
     icon: "student" as const,
+    context: "默认偏礼貌、偏正式",
   },
   {
     title: "职场沟通",
-    href: "/input",
+    subtitle: "与同事领导",
+    href: "/input?scene=work",
     icon: "work" as const,
+    context: "默认偏清晰、有边界",
   },
   {
     title: "社交沟通",
-    href: "/input",
+    subtitle: "与朋友合作方",
+    href: "/input?scene=social",
     icon: "social" as const,
+    context: "默认偏自然、柔和",
   },
   {
     title: "正式事务",
-    href: "/input",
+    subtitle: "与机构/行政",
+    href: "/input?scene=formal",
     icon: "formal" as const,
+    context: "默认偏书面、正式",
   },
 ];
 
@@ -35,32 +44,32 @@ export const styles = [
   {
     title: "先别急",
     icon: "snail" as const,
-    detail: "体面延期，争取时间。",
+    detail: "体面延期",
   },
   {
-    title: "婉拒了当",
+    title: "婉拒了哈",
     icon: "hourglass" as const,
-    detail: "优雅拒绝，不撕破脸。",
+    detail: "柔和拒绝",
   },
   {
     title: "别甩给我",
     icon: "redirect" as const,
-    detail: "划清边界，避免背锅。",
+    detail: "边界清晰",
   },
   {
     title: "该交了吧",
     icon: "bell" as const,
-    detail: "礼貌推进，让对方行动。",
+    detail: "礼貌推进",
   },
   {
     title: "翻译一下",
     icon: "translate" as const,
-    detail: "识别潜台词，看懂真实意思。",
+    detail: "转译语气",
   },
   {
     title: "阴阳一下",
-    icon: "spark" as const,
-    detail: "阴阳怪气，但不直接翻车。",
+    icon: "contrast" as const,
+    detail: "微妙反差",
   },
 ];
 
@@ -68,16 +77,25 @@ export const results = [
   {
     label: "微信短句版",
     tone: "lavender",
-    text: "这件事我不太负责啦～\n建议找负责的同事确认一下哦！",
+    icon: "wechat" as const,
+    fit: "适合微信/IM",
+    tags: ["礼貌但坚定", "边界清晰", "适合微信"],
+    text: "这件事我不太负责啦～\n建议找下对应的同事，我这边就不参与啦。",
   },
   {
     label: "邮件正式版",
     tone: "blue",
-    text: "你好，关于该事项我并非主要负责人，建议您联系相关负责人进行确认，谢谢！",
+    icon: "mail" as const,
+    fit: "适合邮件/书面沟通",
+    tags: ["正式清晰", "适合向上沟通", "不失礼貌"],
+    text: "您好，这个事项目前不在我的负责范围内，建议您联系相关负责同事以获得更准确的回复。\n如需我提供相关信息，请随时告知，我会尽力配合。",
   },
   {
     label: "当面沟通版",
     tone: "pink",
-    text: "我理解你着急想推进，不过这块确实不是我的方向，咱们一起找下负责的同事吧。",
+    icon: "face" as const,
+    fit: "适合当面沟通",
+    tags: ["像朋友说话", "温和推进", "减少冲突"],
+    text: "这个我不太负责诶，可能找 XX 同事更合适。\n我可以帮你拉一下他～",
   },
 ] as const;

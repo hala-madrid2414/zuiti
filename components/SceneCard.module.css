@@ -1,5 +1,14 @@
 .title {
-  font-size: 15px;
+  margin-top: 7px;
+  font-size: 13px;
   font-weight: 900;
   line-height: 1.2;
+}
+
+.subtitle {
+  margin-top: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #8088a0;
 }
