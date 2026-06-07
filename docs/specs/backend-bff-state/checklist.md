@@ -33,3 +33,13 @@
 - Backend worker owns `app/api/**`, `lib/**`, `config/prompts/**`, server copy modules, language inference, and API verification.
 - Frontend worker owns `config/copy/**`, Zustand store, frontend utils/API client, content mappings, page wiring, and mobile visual verification.
 - Review order per task: spec compliance first, code quality second.
+
+## Contest Offline Verification
+
+- [x] Root `mock/generation-results.json` exists and contains `zh-CN`, `en`, `ja`, and `ko` bundles.
+- [x] Browser demo flow no longer calls `fetch('/api/*')`; generation, feedback, and tracking resolve locally.
+- [x] Server generation reads local mock data and does not call external model providers.
+- [x] LangChain/OpenAI runtime dependencies and model env requirements are removed from the contest build.
+- [x] `node scripts/verify-offline-mock.mjs` passes.
+- [x] `npm run lint` passes.
+- [x] `npm run build` passes.

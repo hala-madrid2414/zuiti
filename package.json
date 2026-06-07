@@ -9,8 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@langchain/core": "^1.1.48",
-    "@langchain/openai": "^1.4.7",
     "antd-mobile": "^5.42.3",
     "next": "16.2.7",
     "react": "19.2.4",
