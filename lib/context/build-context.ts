@@ -1,4 +1,5 @@
 import {
+  formatPromptFewShots,
   promptLanguageInstructions,
   promptLanguageLabels,
   promptSceneLabels,
@@ -14,6 +15,7 @@ export type GenerationContext = {
   languageInstruction: string;
   sceneLabel: string;
   styleLabel: string;
+  styleFewShots: string;
   toneSummary: string;
   sessionId?: string;
   previousContext: string;
@@ -28,6 +30,7 @@ export function buildGenerationContext(request: GenerateRequest): GenerationCont
     languageInstruction: promptLanguageInstructions[language],
     sceneLabel: promptSceneLabels[request.scene],
     styleLabel: promptStyleLabels[request.style],
+    styleFewShots: formatPromptFewShots(request.style),
     toneSummary: [
       `礼貌度 ${request.sliders.politeness}/100`,
       `正式度 ${request.sliders.formality}/100`,

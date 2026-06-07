@@ -186,7 +186,9 @@ Before finishing a task:
 
 - Confirm the active requirements and acceptance criteria are satisfied.
 - Run the relevant checks from `checklist.md` when an SDD spec is active.
-- For normal code changes, run `npm run lint` and `npm run build` unless there is a clear reason to skip.
+- Prefer fast delivery and direct answers. Do not run slow verification commands by default.
+- For normal code changes, run `npm run lint` and `npm run build` only when the change is high risk, explicitly requested, required by an active spec/checklist, or necessary to diagnose a suspected breakage.
+- If `npm run lint` or `npm run build` is skipped, mention that it was skipped and why.
 - For UI changes, manually inspect the affected route, including the `375 x 750` mobile viewport when possible.
 - Summarize what changed.
 - List modified files.

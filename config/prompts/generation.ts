@@ -11,10 +11,12 @@ export const generationPromptCopy = {
     "必须只输出一个 JSON 对象，字段固定为 wechat、email、spoken、assumptions、safetyNotes。",
     "wechat/email/spoken 各包含 candidates 三条、recommendedIndex 0-2、reasons 1-3 条。",
     "表达要安全、可直接使用、降低冲突风险。sarcasm 只能轻微反差，不能攻击羞辱。",
+    "few-shot 样例用于学习表达策略，不要照抄样例内容，不要编造事实。",
   ] as const,
   humanLines: [
     "场景：{sceneLabel}",
     "风格：{styleLabel}",
+    "当前风格 few-shot 参考：\n{styleFewShots}",
     "语气参数：{toneSummary}",
     "主语言：{languageLabel}",
     "语言要求：{languageInstruction}",
@@ -22,6 +24,7 @@ export const generationPromptCopy = {
     "输出模式：{outputModes}",
     "上一轮上下文：{previousContext}",
     "用户原话：{text}",
+    "请严格返回 JSON 对象，不要输出 Markdown、代码块或额外解释。",
   ] as const,
 } as const;
 
@@ -36,12 +39,12 @@ export const promptSceneLabels: Record<Scene, string> = {
 };
 
 export const promptStyleLabels: Record<ExpressionStyle, string> = {
-  delay: "体面延期",
-  refuse: "柔和拒绝",
-  boundary: "清晰边界",
-  followup: "礼貌推进",
-  decode: "翻译潜台词或语气",
-  sarcasm: "轻微反差但不攻击",
+  delay: "缓一缓：体面延期，争取时间",
+  refuse: "不方便：优雅拒绝，不撕破脸",
+  boundary: "这锅不背：划清边界，避免背锅",
+  followup: "催一催：礼貌推进，让对方行动",
+  decode: "话里有话：识别潜台词，看懂真实意思",
+  sarcasm: "礼貌带刺：阴阳怪气，但不直接翻车",
 };
 
 export const promptLanguageLabels: Record<ResolvedLanguage, string> = {
