@@ -1,3 +1,4 @@
+import { apiErrorCopy } from "@/config";
 import type { GenerateDraft, GenerateResult } from "@/stores/expression-flow-store";
 
 type ApiSuccess<T> = {
@@ -42,7 +43,7 @@ async function postJson<T>(url: string, payload: unknown): Promise<T> {
     return {
       ok: false,
       code: "NETWORK_ERROR",
-      message: "服务暂时不可用，请稍后再试。",
+      message: apiErrorCopy.networkError,
     } as T;
   }
 

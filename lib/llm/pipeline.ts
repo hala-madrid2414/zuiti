@@ -63,7 +63,7 @@ export async function generateWithLlmOrFallback(
   const { configured, model } = createChatModel();
 
   if (!configured || !model) {
-    return createFallbackResult(request);
+    return createFallbackResult(request, { language: context.language });
   }
 
   try {
@@ -79,7 +79,10 @@ export async function generateWithLlmOrFallback(
       }),
     );
     const parsed = parseJsonObject(contentToText(response.content));
-    const normalized = normalizeGeneratedResult(parsed);
+    const normalized = normalizeGeneratedResult(parsed, {
+      source: "model",
+      language: context.language,
+    });
 
     if (!normalized) {
       throw new ModelBadOutputError();
@@ -88,9 +91,15 @@ export async function generateWithLlmOrFallback(
     return normalized;
   } catch (error) {
     if (error instanceof ModelTimeoutError || error instanceof ModelBadOutputError) {
-      return createFallbackResult(request, error.message);
+      return createFallbackResult(request, {
+        language: context.language,
+        note: error.message,
+      });
     }
 
-    return createFallbackResult(request, "模型调用失败，已使用本地演示兜底生成。");
+    return createFallbackResult(request, {
+      language: context.language,
+      note: "模型调用失败，已使用本地演示兜底生成。",
+    });
   }
 }

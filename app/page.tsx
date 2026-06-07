@@ -6,6 +6,7 @@ import { MobileShell } from "@/components/MobileShell";
 import { PrimaryButton } from "@/components/PrimaryButton";
 import { SceneCard } from "@/components/SceneCard";
 import { scenes, styles as toneStyles } from "@/components/content";
+import { homePageCopy } from "@/config";
 import { useExpressionFlowStore } from "@/stores/expression-flow-store";
 import styles from "./page.module.css";
 
@@ -17,8 +18,12 @@ export default function Home() {
     <MobileShell className={styles.container}>
       <div className={styles.pageContent}>
         <div className={styles.topRow}>
-          <span className={styles.topLabel}>年轻人的场景表达转换器</span>
-          <a href="/results" className={styles.profileButton} aria-label="我的收藏">
+          <span className={styles.topLabel}>{homePageCopy.topLabel}</span>
+          <a
+            href="/results"
+            className={styles.profileButton}
+            aria-label={homePageCopy.profileAriaLabel}
+          >
             <span aria-hidden="true" />
           </a>
         </div>
@@ -26,15 +31,15 @@ export default function Home() {
         <section className={styles.heroSection}>
           <div className={styles.heroCopy}>
             <h1 className={styles.title}>
-              话到嘴边
+              {homePageCopy.heroTitle}
               <span className={styles.titleSpark} aria-hidden="true" />
             </h1>
             <p className={styles.subtitle}>
-              把不好开口的话，
-              换一种更合适的表达
+              {homePageCopy.heroSubtitleLines[0]}
+              {homePageCopy.heroSubtitleLines[1]}
             </p>
             <p className={styles.description}>
-              帮你把真实想法，转成适合不同对象、不同场景的表达版本
+              {homePageCopy.heroDescription}
             </p>
           </div>
           <div className={styles.iconWrapper} aria-hidden="true">
@@ -63,21 +68,21 @@ export default function Home() {
 
         <section className={styles.recentSection}>
           <div className={styles.sectionHeader}>
-            <h2>最近使用</h2>
-            <a href="/results">查看全部</a>
+            <h2>{homePageCopy.recentSectionTitle}</h2>
+            <a href="/results">{homePageCopy.recentSectionAction}</a>
           </div>
           <a className={`soft-card ${styles.recentCard}`} href="/results">
             <DecorativeIcon kind="spark" size="sm" />
             <div>
-              <strong>关于周末活动分工的沟通</strong>
-              <span>职场沟通 · 别甩给我</span>
+              <strong>{homePageCopy.recentCardTitle}</strong>
+              <span>{homePageCopy.recentCardSubtitle}</span>
             </div>
-            <span className={styles.recentMeta}>刚刚</span>
+            <span className={styles.recentMeta}>{homePageCopy.recentCardMeta}</span>
           </a>
         </section>
 
         <section className={styles.hotSection}>
-          <h2>热门风格</h2>
+          <h2>{homePageCopy.hotSectionTitle}</h2>
           <div className={styles.hotList}>
             {toneStyles.map((style) => (
               <a
@@ -98,7 +103,7 @@ export default function Home() {
 
         <div className={styles.buttonWrapper}>
           <PrimaryButton href="/input?scene=work" sparkle onClick={() => setScene("work")}>
-            开始转换
+            {homePageCopy.primaryAction}
           </PrimaryButton>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { resultCardCopy } from "@/config";
 import styles from "./ResultCard.module.css";
 
 type ResultCardProps = {
@@ -68,7 +69,7 @@ export function ResultCard({
       <p className={styles.text}>
         {text}
       </p>
-      <div className={styles.tags} aria-label="表达标签">
+      <div className={styles.tags} aria-label={resultCardCopy.tagsAriaLabel}>
         {tags.map((tag) => (
           <span key={tag}>{tag}</span>
         ))}
@@ -76,19 +77,19 @@ export function ResultCard({
       <div className={styles.actions}>
         <button type="button" className="result-action" onClick={onCopy}>
           <span className="action-icon copy" aria-hidden="true" />
-          复制
+          {resultCardCopy.copyAction}
         </button>
         <button type="button" className="result-action" onClick={onUseful}>
           <span className="action-icon star" aria-hidden="true" />
-          有用
+          {resultCardCopy.usefulAction}
         </button>
         <button type="button" className="result-action" onClick={onRegenerate}>
           <span className="action-icon refresh" aria-hidden="true" />
-          再润色
+          {resultCardCopy.regenerateAction}
         </button>
         <button type="button" className="result-action" onClick={onSwitchStyle}>
           <span className="action-icon switch" aria-hidden="true" />
-          换风格
+          {resultCardCopy.switchStyleAction}
         </button>
       </div>
     </article>

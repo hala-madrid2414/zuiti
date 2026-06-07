@@ -9,6 +9,7 @@ import { PrimaryButton } from "@/components/PrimaryButton";
 import { StyleCard } from "@/components/StyleCard";
 import { TopBar } from "@/components/TopBar";
 import { scenes, styles } from "@/components/content";
+import { inputPageCopy } from "@/config";
 import { useExpressionFlowStore } from "@/stores/expression-flow-store";
 import { getStyleByIndex, getStyleIndex, isScene } from "@/utils/content-mapping";
 import stylesCss from "./page.module.css";
@@ -44,15 +45,15 @@ function InputContent() {
     <MobileShell className={stylesCss.container}>
       <div className={stylesCss.pageContent}>
         <TopBar
-          title="你想说的话"
+          title={inputPageCopy.title}
           backHref="/"
           actions={[
             {
-              label: "示例",
+              label: inputPageCopy.exampleAction,
               icon: "spark",
-              onClick: () => setValue("这个活不是我负责的，别老找我。"),
+              onClick: () => setValue(inputPageCopy.exampleRawText),
             },
-            { label: "清空", icon: "trash", onClick: () => setValue("") },
+            { label: inputPageCopy.clearAction, icon: "trash", onClick: () => setValue("") },
           ]}
         />
 
@@ -62,9 +63,9 @@ function InputContent() {
               htmlFor="raw-thought"
               className={stylesCss.label}
             >
-              对什么人，说什么话
+              {inputPageCopy.fieldLabel}
             </label>
-            {scene ? <span>{scene.context}</span> : <span>一句原话，也可以有更好的说法</span>}
+            {scene ? <span>{scene.context}</span> : <span>{inputPageCopy.emptySceneHint}</span>}
           </div>
           <div className={`soft-card ${stylesCss.textAreaContainer}`}>
             <TextArea
@@ -72,7 +73,7 @@ function InputContent() {
               className={stylesCss.textArea}
               value={value}
               onChange={setValue}
-              placeholder={"在这里输入你想说的话...\n\n例如：这个活不是我负责的，别老找我。"}
+              placeholder={inputPageCopy.textAreaPlaceholder}
               maxLength={300}
               showCount
               rows={9}
@@ -83,8 +84,8 @@ function InputContent() {
 
         <section className={stylesCss.section2}>
           <div className={stylesCss.sectionTitleRow}>
-            <h2 className={stylesCss.sectionTitle}>选择风格</h2>
-            <span>左右滑动选择</span>
+            <h2 className={stylesCss.sectionTitle}>{inputPageCopy.styleSectionTitle}</h2>
+            <span>{inputPageCopy.styleSectionHint}</span>
           </div>
           <div className={stylesCss.cardList}>
             {styles.map((style, index) => (
@@ -101,16 +102,16 @@ function InputContent() {
         </section>
 
         <p className={stylesCss.hint}>
-          {canContinue ? "左右滑动，选择你喜欢的风格" : "先输入至少 2 个字，再继续生成"}
+          {canContinue ? inputPageCopy.readyHint : inputPageCopy.blockedHint}
         </p>
         <div className={stylesCss.buttonWrapper}>
           {canContinue ? (
             <PrimaryButton href="/tone" sparkle>
-              开始转换
+              {inputPageCopy.primaryAction}
             </PrimaryButton>
           ) : (
             <button type="button" className="primary-button" disabled>
-              <span>开始转换</span>
+              <span>{inputPageCopy.primaryAction}</span>
             </button>
           )}
         </div>

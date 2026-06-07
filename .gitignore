@@ -13,6 +13,17 @@
 # testing
 /coverage
 
+# python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
 # next.js
 /.next/
 /out/

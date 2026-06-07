@@ -1,39 +1,31 @@
 "use client";
 
 import { create } from "zustand";
+import type {
+  ExpressionStyle,
+  GenerateResult,
+  Operation,
+  OutputMode,
+  Scene,
+  ToneSliders,
+} from "@/lib/domain/enums";
 
-export type Scene = "student" | "work" | "social" | "formal";
-export type ExpressionStyle =
-  | "delay"
-  | "refuse"
-  | "boundary"
-  | "followup"
-  | "decode"
-  | "sarcasm";
-export type OutputMode = "wechat" | "email" | "spoken";
-export type Operation = "generate" | "regenerate" | "edit";
+export type {
+  ExpressionStyle,
+  GenerateResult,
+  Operation,
+  OutputMode,
+  Scene,
+  ToneSliders,
+} from "@/lib/domain/enums";
 
-export type ToneSliders = {
-  politeness: number;
-  formality: number;
-  distance: number;
-};
-
-export type OutputResult = {
-  candidates: [string, string, string];
-  recommendedIndex: 0 | 1 | 2;
-  reasons: string[];
-};
-
-export type GenerateResult = {
-  wechat: OutputResult;
-  email: OutputResult;
-  spoken: OutputResult;
-  assumptions?: string[];
-  safetyNotes?: string[];
-};
-
-export type GenerationStatus = "idle" | "loading" | "success" | "fail" | "refused";
+export type GenerationStatus =
+  | "idle"
+  | "loading"
+  | "success-model"
+  | "success-fallback"
+  | "fail"
+  | "refused";
 
 export type GenerateDraft = {
   text: string;
@@ -157,7 +149,7 @@ export const useExpressionFlowStore = create<ExpressionFlowState>((set, get) => 
   setGenerationSuccess: (result, requestKey) => {
     set({
       generation: {
-        status: "success",
+        status: result.meta.source === "fallback" ? "success-fallback" : "success-model",
         result,
         errorCode: null,
         errorMessage: null,

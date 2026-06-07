@@ -42,6 +42,8 @@ export async function generateExpression(request: GenerateRequest): Promise<Gene
       operation: request.operation,
       scene: request.scene,
       style: request.style,
+      source: data.meta.source,
+      language: data.meta.language,
       latencyMs: Date.now() - startedAt,
     });
 

@@ -6,11 +6,13 @@ import { PrimaryButton } from "@/components/PrimaryButton";
 import { ResultCard } from "@/components/ResultCard";
 import { TopBar } from "@/components/TopBar";
 import { results } from "@/components/content";
+import { resultsPageCopy } from "@/config";
 import {
   createRequestKey,
   useExpressionFlowStore,
   type GenerateDraft,
   type GenerateResult,
+  type GenerationStatus,
   type OutputMode,
 } from "@/stores/expression-flow-store";
 import { generateExpression, sendFeedback, trackEvent } from "@/utils/expression-api";
@@ -26,6 +28,10 @@ function getRecommendedText(result: GenerateResult, mode: OutputMode) {
   return output.candidates[output.recommendedIndex] ?? output.candidates[0];
 }
 
+function isSuccessStatus(status: GenerationStatus): status is "success-model" | "success-fallback" {
+  return status === "success-model" || status === "success-fallback";
+}
+
 export default function ResultsPage() {
   const text = useExpressionFlowStore((state) => state.text);
   const sessionId = useExpressionFlowStore((state) => state.sessionId);
@@ -38,6 +44,19 @@ export default function ResultsPage() {
   const draft = buildDraft();
   const requestKey = draft ? createRequestKey(draft) : null;
   const generatedResult = generation.result;
+  const successStatus = isSuccessStatus(generation.status) ? generation.status : null;
+  const successCopy =
+    successStatus === "success-fallback"
+      ? {
+          title: resultsPageCopy.successFallbackTitle,
+          description: resultsPageCopy.successFallbackDescription,
+        }
+      : successStatus === "success-model"
+        ? {
+            title: resultsPageCopy.successModelTitle,
+            description: resultsPageCopy.successModelDescription,
+          }
+        : null;
 
   const runGenerate = useCallback(
     async (nextDraft: GenerateDraft) => {
@@ -64,7 +83,7 @@ export default function ResultsPage() {
       return;
     }
 
-    if (generation.status === "success" && generation.requestKey === requestKey) {
+    if (isSuccessStatus(generation.status) && generation.requestKey === requestKey) {
       return;
     }
 
@@ -83,7 +102,7 @@ export default function ResultsPage() {
   }, [draft, generation.requestKey, generation.status, requestKey, runGenerate]);
 
   const cards = useMemo(() => {
-    if (!generatedResult) {
+    if (!generatedResult || !successStatus) {
       return [];
     }
 
@@ -98,7 +117,7 @@ export default function ResultsPage() {
         mode,
       };
     });
-  }, [generatedResult]);
+  }, [generatedResult, successStatus]);
 
   const handleCopy = async (mode: OutputMode) => {
     if (!generatedResult) {
@@ -136,59 +155,87 @@ export default function ResultsPage() {
   return (
     <MobileShell className={styles.container}>
       <TopBar
-        title="转换结果"
-        subtitle="已为你生成 3 种表达版本"
+        title={resultsPageCopy.title}
+        subtitle={resultsPageCopy.subtitle}
         backHref="/tone"
         actions={[
-          { label: "收藏", icon: "star" },
-          { label: "分享", icon: "share" },
+          { label: resultsPageCopy.saveAction, icon: "star" },
+          { label: resultsPageCopy.shareAction, icon: "share" },
         ]}
       />
 
       <div className={styles.content}>
         <section className={`soft-card ${styles.originalCard}`}>
-          <span>原话</span>
-          <p>{text.trim() || "还没有输入原话，请先回到输入页补充。"}</p>
+          <span>{resultsPageCopy.originalLabel}</span>
+          <p>{text.trim() || resultsPageCopy.emptyOriginal}</p>
         </section>
 
         {!draft ? (
           <section className={`soft-card ${styles.stateCard}`}>
-            <h2>还不能生成结果</h2>
-            <p>请先选择沟通场景，并输入至少 2 个字的真实想法。</p>
+            <h2>{resultsPageCopy.missingDraftTitle}</h2>
+            <p>{resultsPageCopy.missingDraftDescription}</p>
             <PrimaryButton href="/input" sparkle>
-              返回输入
+              {resultsPageCopy.missingDraftAction}
             </PrimaryButton>
           </section>
         ) : null}
 
         {draft && generation.status === "loading" ? (
           <section className={`soft-card ${styles.stateCard}`}>
-            <h2>正在生成</h2>
-            <p>正在把你的真实想法转换成更适合发送、书写和当面表达的版本。</p>
+            <h2>{resultsPageCopy.loadingTitle}</h2>
+            <p>{resultsPageCopy.loadingDescription}</p>
           </section>
         ) : null}
 
         {draft && generation.status === "refused" ? (
           <section className={`soft-card ${styles.stateCard}`}>
-            <h2>这句话需要换个目标</h2>
-            <p>{generation.errorMessage ?? "当前表达风险较高，请改为描述事实、影响和诉求。"}</p>
+            <h2>{resultsPageCopy.refusedTitle}</h2>
+            <p>{generation.errorMessage ?? resultsPageCopy.refusedFallbackMessage}</p>
             <PrimaryButton href="/input" sparkle>
-              修改原话
+              {resultsPageCopy.refusedAction}
             </PrimaryButton>
           </section>
         ) : null}
 
         {draft && generation.status === "fail" ? (
           <section className={`soft-card ${styles.stateCard}`}>
-            <h2>生成暂时失败</h2>
-            <p>{generation.errorMessage ?? "服务暂时不可用，请稍后再试。"}</p>
+            <h2>{resultsPageCopy.failTitle}</h2>
+            <p>{generation.errorMessage ?? resultsPageCopy.failFallbackMessage}</p>
             <button type="button" className="primary-button" onClick={handleRegenerate}>
-              <span>重试一次</span>
+              <span>{resultsPageCopy.retryAction}</span>
             </button>
           </section>
         ) : null}
 
-        {cards.length > 0 && generation.status === "success" ? (
+        {draft && generatedResult && successCopy && successStatus ? (
+          <section
+            className={`soft-card ${styles.stateCard} ${
+              successStatus === "success-fallback" ? styles.fallbackState : styles.modelState
+            }`}
+          >
+            <div className={styles.stateHeader}>
+              <h2>{successCopy.title}</h2>
+              <span className={styles.stateBadge}>
+                {resultsPageCopy.sourceLabels[generatedResult.meta.source]}
+              </span>
+            </div>
+            <p>{successCopy.description}</p>
+            <div className={styles.metaRow}>
+              <span className={styles.metaPill}>
+                {resultsPageCopy.metaSourceLabel}：{resultsPageCopy.sourceLabels[generatedResult.meta.source]}
+              </span>
+              <span className={styles.metaPill}>
+                {resultsPageCopy.metaLanguageLabel}：
+                {resultsPageCopy.languageLabels[generatedResult.meta.language]}
+              </span>
+            </div>
+            {generatedResult.safetyNotes.length > 0 ? (
+              <p className={styles.metaNote}>{generatedResult.safetyNotes[0]}</p>
+            ) : null}
+          </section>
+        ) : null}
+
+        {cards.length > 0 && successStatus ? (
           <section className={styles.resultsList}>
             {cards.map((result, index) => (
               <ResultCard
@@ -211,18 +258,20 @@ export default function ResultsPage() {
           </section>
         ) : null}
 
-        <button type="button" className={styles.compareButton}>
-          <span aria-hidden="true" />
-          查看“原话 → 优化版”的变化点
-        </button>
+        {cards.length > 0 && successStatus ? (
+          <button type="button" className={styles.compareButton}>
+            <span aria-hidden="true" />
+            {resultsPageCopy.compareAction}
+          </button>
+        ) : null}
       </div>
 
       <div className={styles.bottomActions}>
         <a href="/tone" className={styles.secondaryButton}>
-          再调整语气
+          {resultsPageCopy.adjustToneAction}
         </a>
         <PrimaryButton href="/input" sparkle>
-          换一种风格
+          {resultsPageCopy.switchStyleAction}
         </PrimaryButton>
       </div>
     </MobileShell>

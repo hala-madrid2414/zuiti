@@ -6,6 +6,7 @@ import { MobileShell } from "@/components/MobileShell";
 import { PrimaryButton } from "@/components/PrimaryButton";
 import { ToneSlider } from "@/components/ToneSlider";
 import { TopBar } from "@/components/TopBar";
+import { tonePageCopy } from "@/config";
 import { defaultSliders, useExpressionFlowStore } from "@/stores/expression-flow-store";
 import styles from "./page.module.css";
 
@@ -22,18 +23,18 @@ export default function TonePage() {
 
   const preview = useMemo(() => {
     if (formal > 72) {
-      return "您好，关于您提到的事项目前不在我的负责范围内，建议联系对应负责人确认，我会尽力配合需要的信息。";
+      return tonePageCopy.previewSamples.formalHigh;
     }
 
     if (distance < 45) {
-      return "这个我不太负责诶，可能找对应同事更合适，我可以帮你问问该找谁～";
+      return tonePageCopy.previewSamples.distanceLow;
     }
 
     if (polite > 80) {
-      return "这件事我这边可能不太负责，建议你联系对应同事确认一下，会更准确一些。";
+      return tonePageCopy.previewSamples.politenessHigh;
     }
 
-    return "我理解你的需求，这个部分目前不在我的负责范围内，我可以帮你确认负责的同事是谁～";
+    return tonePageCopy.previewSamples.default;
   }, [polite, formal, distance]);
 
   const radarDotStyle: CSSProperties & {
@@ -47,10 +48,10 @@ export default function TonePage() {
   return (
     <MobileShell className={styles.container}>
       <TopBar
-        title="语气仪表盘"
-        subtitle="微调语气，让表达更贴近你的意图"
+        title={tonePageCopy.title}
+        subtitle={tonePageCopy.subtitle}
         backHref="/input"
-        actions={[{ label: "重置", icon: "reset", onClick: () => setSliders(defaultSliders) }]}
+        actions={[{ label: tonePageCopy.resetAction, icon: "reset", onClick: () => setSliders(defaultSliders) }]}
       />
 
       <div className={styles.content}>
@@ -58,11 +59,11 @@ export default function TonePage() {
           <section className={`soft-card ${styles.previewSection}`}>
             <div className={styles.previewCopy}>
               <div className={styles.previewHeader}>
-                <h2 className={styles.previewTitle}>还差一句原话</h2>
-                <span>待补充</span>
+                <h2 className={styles.previewTitle}>{tonePageCopy.missingDraftTitle}</h2>
+                <span>{tonePageCopy.missingDraftBadge}</span>
               </div>
               <p className={styles.previewText}>
-                先回到输入页，选择场景并写下你想表达的真实想法。
+                {tonePageCopy.missingDraftDescription}
               </p>
             </div>
           </section>
@@ -70,8 +71,8 @@ export default function TonePage() {
         <section className={`soft-card ${styles.previewSection}`}>
           <div className={styles.previewCopy}>
             <div className={styles.previewHeader}>
-              <h2 className={styles.previewTitle}>表达预览</h2>
-              <span>实时预览</span>
+              <h2 className={styles.previewTitle}>{tonePageCopy.previewTitle}</h2>
+              <span>{tonePageCopy.previewBadge}</span>
             </div>
             <p className={styles.previewText}>
               {preview}
@@ -90,27 +91,27 @@ export default function TonePage() {
 
         <div className={styles.sliderContainer}>
           <ToneSlider
-            title="礼貌程度"
-            left="直接"
-            right="礼貌"
+            title={tonePageCopy.sliders.politeness.title}
+            left={tonePageCopy.sliders.politeness.left}
+            right={tonePageCopy.sliders.politeness.right}
             value={polite}
-            hint="语气更礼貌，表达更照顾对方感受"
+            hint={tonePageCopy.sliders.politeness.hint}
             onChange={(value) => setSlider("politeness", value)}
           />
           <ToneSlider
-            title="正式程度"
-            left="日常"
-            right="正式"
+            title={tonePageCopy.sliders.formality.title}
+            left={tonePageCopy.sliders.formality.left}
+            right={tonePageCopy.sliders.formality.right}
             value={formal}
-            hint="表达更正式，适合书面或职场场景"
+            hint={tonePageCopy.sliders.formality.hint}
             onChange={(value) => setSlider("formality", value)}
           />
           <ToneSlider
-            title="关系距离"
-            left="熟人"
-            right="陌生/上级"
+            title={tonePageCopy.sliders.distance.title}
+            left={tonePageCopy.sliders.distance.left}
+            right={tonePageCopy.sliders.distance.right}
             value={distance}
-            hint="保持适当距离，表达更得体"
+            hint={tonePageCopy.sliders.distance.hint}
             onChange={(value) => setSlider("distance", value)}
           />
         </div>
@@ -118,7 +119,7 @@ export default function TonePage() {
 
       <div className={styles.buttonWrapper}>
         <PrimaryButton href={hasDraft ? "/results" : "/input"} sparkle>
-          {hasDraft ? "生成结果" : "返回输入"}
+          {hasDraft ? tonePageCopy.generateAction : tonePageCopy.backToInputAction}
         </PrimaryButton>
       </div>
     </MobileShell>

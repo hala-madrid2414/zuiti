@@ -108,6 +108,24 @@
   padding: 18px 16px;
 }
 
+.stateHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.stateBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 74px;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 900;
+}
+
 .stateCard h2 {
   margin: 0;
   font-size: 17px;
@@ -120,6 +138,49 @@
   font-size: 12px;
   font-weight: 800;
   line-height: 20px;
+}
+
+.modelState {
+  background: linear-gradient(180deg, rgba(248, 251, 255, 0.98), rgba(255, 255, 255, 0.92));
+}
+
+.modelState .stateBadge {
+  background: rgba(121, 160, 255, 0.16);
+  color: #4365a8;
+}
+
+.fallbackState {
+  background: linear-gradient(180deg, rgba(255, 250, 241, 0.98), rgba(255, 255, 255, 0.92));
+}
+
+.fallbackState .stateBadge {
+  background: rgba(255, 183, 107, 0.2);
+  color: #a9692a;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.metaPill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(246, 247, 255, 0.9);
+  padding: 5px 10px;
+  font-size: 10px;
+  font-weight: 900;
+  color: #5d6684;
+}
+
+.metaNote {
+  margin: 0;
+  color: #8a6273;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 18px;
 }
 
 @media (max-width: 340px) {

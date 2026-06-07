@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { topBarCopy } from "@/config";
 import styles from "./TopBar.module.css";
 
 type TopBarProps = {
@@ -21,7 +22,7 @@ export function TopBar({ title, backHref, subtitle, actions = [] }: TopBarProps)
             <Link
               href={backHref}
               className={styles.backButton}
-              aria-label="返回"
+              aria-label={topBarCopy.backAriaLabel}
             >
               ‹
             </Link>
