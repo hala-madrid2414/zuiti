@@ -1,11 +1,11 @@
-# Backend BFF + Frontend State Checklist
+﻿# Backend BFF + Frontend State Checklist
 
 - [ ] Updated acceptance criteria for centralized copy, language-following generation, and demo diagnostics are fully satisfied
 - [ ] `config/` exists at project root and is the single editable entry for UI copy, server copy, fallback copy, and prompt copy
 - [ ] `app/**`, `components/**`, `utils/**`, and `lib/**` no longer keep configurable product text inline, except structural tokens or fixed protocol fields
 - [ ] Prompt text has moved out of `lib/llm/**` business logic into `config/prompts/**`
 - [ ] `/api/generate` exposes enough metadata to distinguish `model` vs `fallback` and the resolved response language
-- [ ] Results page renders generated正文 only from Zustand draft + API response, not from static sample text
+- [ ] Results page renders generated姝ｆ枃 only from Zustand draft + API response, not from static sample text
 - [ ] `npm run dev` live-chain inspection confirms whether frontend and backend are connected
 - [ ] Chinese input and non-Chinese or mixed-language input both return language-following results
 - [ ] Fallback path, model path, refusal path, failure path, and missing-draft path are visually distinguishable
@@ -34,12 +34,3 @@
 - Frontend worker owns `config/copy/**`, Zustand store, frontend utils/API client, content mappings, page wiring, and mobile visual verification.
 - Review order per task: spec compliance first, code quality second.
 
-## Contest Offline Verification
-
-- [x] Root `mock/generation-results.json` exists and contains `zh-CN`, `en`, `ja`, and `ko` bundles.
-- [x] Browser demo flow no longer calls `fetch('/api/*')`; generation, feedback, and tracking resolve locally.
-- [x] Server generation reads local mock data and does not call external model providers.
-- [x] LangChain/OpenAI runtime dependencies and model env requirements are removed from the contest build.
-- [x] `node scripts/verify-offline-mock.mjs` passes.
-- [x] `npm run lint` passes.
-- [x] `npm run build` passes.

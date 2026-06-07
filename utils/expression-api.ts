@@ -1,6 +1,4 @@
-import mockGenerationData from "@/mock/generation-results.json";
-import { inferPrimaryLanguage } from "@/lib/context/infer-language";
-import { buildMockGenerationResult, type MockGenerationFile } from "@/lib/mock/build-generation";
+import { apiErrorCopy } from "@/config";
 import type { GenerateDraft, GenerateResult } from "@/stores/expression-flow-store";
 
 type ApiSuccess<T> = {
@@ -30,27 +28,36 @@ type TrackPayload = {
   payload?: Record<string, unknown>;
 };
 
-const offlineMock = mockGenerationData as unknown as MockGenerationFile;
+async function postJson<T>(url: string, payload: unknown): Promise<T> {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
 
-export async function generateExpression(draft: GenerateDraft): Promise<GenerateApiResponse> {
-  return {
-    ok: true,
-    data: buildMockGenerationResult(offlineMock, draft, inferPrimaryLanguage(draft.text)),
-  };
+  const data = (await response.json().catch(() => null)) as T | null;
+
+  if (!response.ok && data === null) {
+    return {
+      ok: false,
+      code: "NETWORK_ERROR",
+      message: apiErrorCopy.networkError,
+    } as T;
+  }
+
+  return data as T;
 }
 
-export async function sendFeedback(payload: FeedbackPayload): Promise<ApiSuccess<{ received: boolean }>> {
-  void payload;
-  return {
-    ok: true,
-    data: { received: true },
-  };
+export function generateExpression(draft: GenerateDraft) {
+  return postJson<GenerateApiResponse>("/api/generate", draft);
 }
 
-export async function trackEvent(payload: TrackPayload): Promise<ApiSuccess<{ received: boolean }>> {
-  void payload;
-  return {
-    ok: true,
-    data: { received: true },
-  };
+export function sendFeedback(payload: FeedbackPayload) {
+  return postJson<ApiSuccess<{ received?: boolean }> | ApiFailure>("/api/feedback", payload);
+}
+
+export function trackEvent(payload: TrackPayload) {
+  return postJson<ApiSuccess<{ received?: boolean }> | ApiFailure>("/api/track", payload);
 }

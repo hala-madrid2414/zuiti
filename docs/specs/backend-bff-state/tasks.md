@@ -1,4 +1,4 @@
-# Backend BFF + Frontend State Tasks
+﻿# Backend BFF + Frontend State Tasks
 
 ## P0 - Critical
 
@@ -78,17 +78,8 @@
 - Backend contract tasks T004-T015 must complete before frontend API integration T018/T024.
 - Store tasks T017-T020 must complete before page wiring T021-T025.
 - Verification runs after implementation tasks.
-- T037 must complete before T038-T042, otherwise migration scope is easy to漏项。
-- T038 should complete before bulk code migration T039-T042.
+- T037 must complete before T038-T042, otherwise migration scope is easy to婕忛」銆?- T038 should complete before bulk code migration T039-T042.
 - T043 must complete before T044-T047.
 - T044 must complete before T045.
 - T046-T048 run after T039-T045.
 
-## P6 - Contest Offline Mock Deployment
-
-- [x] T049 Add root-level `mock/generation-results.json` with all contest demo generation copy.
-- [x] T050 Add mock generation helpers in `lib/mock/**` so server code reads from the root `mock` directory.
-- [x] T051 Replace model-backed generation in `lib/llm/pipeline.ts` with mock-backed fallback generation for the contest build.
-- [x] T052 Replace browser `fetch('/api/*')` calls in `utils/expression-api.ts` with local mock generation, local feedback acknowledgement, and local tracking acknowledgement.
-- [x] T053 Remove LangChain/OpenAI runtime dependencies from `package.json` and neutralize model credential usage.
-- [x] T054 Add and run `scripts/verify-offline-mock.mjs` to prove no client fetch, no model key usage, and required mock bundles exist.
