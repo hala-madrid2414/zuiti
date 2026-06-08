@@ -9,12 +9,12 @@ import { TopBar } from "@/components/TopBar";
 import { scenes, styles as styleOptions, targetOptionsByScene } from "@/components/content";
 import { tonePageCopy } from "@/config";
 import { getContextDefaultSliders, minInputTextLength } from "@/lib/domain/defaults";
+import { getTonePreviewText } from "@/lib/tone/preview";
 import {
   createRequestKey,
   defaultSliders,
   useExpressionFlowStore,
   type GenerateDraft,
-  type GenerateResult,
   type GenerationStatus,
 } from "@/stores/expression-flow-store";
 import { generateExpression } from "@/utils/expression-api";
@@ -22,11 +22,6 @@ import styles from "./page.module.css";
 
 function isSuccessStatus(status: GenerationStatus): status is "success-model" | "success-fallback" {
   return status === "success-model" || status === "success-fallback";
-}
-
-function getPreviewText(result: GenerateResult) {
-  const output = result.wechat;
-  return output.candidates[output.recommendedIndex] ?? output.candidates[0];
 }
 
 export default function TonePage() {
@@ -127,7 +122,23 @@ export default function TonePage() {
     });
   };
 
-  const preview = useMemo(() => {
+  const fallbackPreview = useMemo(() => {
+    if (formal > 72) {
+      return tonePageCopy.previewSamples.formalHigh;
+    }
+
+    if (distance < 45) {
+      return tonePageCopy.previewSamples.distanceLow;
+    }
+
+    if (polite > 80) {
+      return tonePageCopy.previewSamples.politenessHigh;
+    }
+
+    return tonePageCopy.previewSamples.default;
+  }, [polite, formal, distance]);
+
+  const previewText = useMemo(() => {
     if (!draft || !requestKey) {
       return tonePageCopy.missingDraftDescription;
     }
@@ -145,12 +156,16 @@ export default function TonePage() {
     }
 
     if (isSuccessStatus(generation.status) && generation.requestKey === requestKey && generation.result) {
-      return getPreviewText(generation.result);
+      return getTonePreviewText({
+        fallbackPreview,
+        generatedResult: generation.result,
+      });
     }
 
     return tonePageCopy.previewPending;
   }, [
     draft,
+    fallbackPreview,
     generation.errorMessage,
     generation.requestKey,
     generation.result,
@@ -211,7 +226,7 @@ export default function TonePage() {
               <span>{tonePageCopy.previewBadge}</span>
             </div>
             <p className={styles.previewText}>
-              {preview}
+              {previewText}
             </p>
           </div>
           <div className={styles.previewVisual}>

@@ -98,7 +98,7 @@ export const expressionStyles = [
     prdKey: "delay" as const,
     title: "先别急",
     icon: "snail" as const,
-    detail: "体面延期",
+    detail: "体面延期，争取时间。",
     description: "把“现在不方便/需要更多时间”说得更稳妥，让对方知道你不是消失，而是在给出可接受的节奏。",
   },
   {
@@ -106,7 +106,7 @@ export const expressionStyles = [
     prdKey: "reject" as const,
     title: "婉拒了哈",
     icon: "hourglass" as const,
-    detail: "柔和拒绝",
+    detail: "优雅拒绝，不撕破脸。",
     description: "把拒绝说得不伤人，说明限制和原因，同时给对方一个可接受的替代方向。",
   },
   {
@@ -114,7 +114,7 @@ export const expressionStyles = [
     prdKey: "boundary" as const,
     title: "别甩给我",
     icon: "redirect" as const,
-    detail: "边界清晰",
+    detail: "划清边界，避免背锅。",
     description: "把责任边界说清楚，不硬怼、不背锅，让对方知道该找谁、你能配合到哪里。",
   },
   {
@@ -122,7 +122,7 @@ export const expressionStyles = [
     prdKey: "urge" as const,
     title: "该交了吧",
     icon: "bell" as const,
-    detail: "礼貌推进",
+    detail: "礼貌推进，让对方行动。",
     description: "把催促变成推进，说明时间点、影响和下一步，让对方更容易行动。",
   },
   {
@@ -130,7 +130,7 @@ export const expressionStyles = [
     prdKey: "translate" as const,
     title: "翻译一下",
     icon: "translate" as const,
-    detail: "转译语气",
+    detail: "识别潜台词，看懂真实意思。",
     description: "把太直、太冲或太绕的话转成更适合当前对象理解和接受的表达。",
   },
   {
@@ -138,7 +138,7 @@ export const expressionStyles = [
     prdKey: "sarcasm" as const,
     title: "阴阳一下",
     icon: "contrast" as const,
-    detail: "微妙反差",
+    detail: "阴阳怪气，但不直接翻车。",
     description: "保留一点态度，但降低攻击性，适合轻微表达不满或反差感。",
   },
 ] as const;
