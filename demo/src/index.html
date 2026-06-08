@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>话到嘴边 - 离线 Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="home">
+    <main class="phone-shell">
+      <header class="topbar">
+        <span class="pill-link">互动空间离线 Demo</span>
+        <a class="pill-link" href="./results.html">查看结果页</a>
+      </header>
+
+      <section class="hero-card soft-card">
+        <p class="badge">年轻人的场景表达转换器</p>
+        <h1 class="hero-title">话到嘴边</h1>
+        <p class="hero-subtitle">
+          把不好开口的话，换成更合适的表达。当前版本完全离线运行，只展示本地 mock 结果。
+        </p>
+      </section>
+
+      <section class="section-block">
+        <div class="page-header">
+          <div>
+            <h2 class="section-title">选择场景</h2>
+            <p class="section-hint">保留完整四页流程，扫码也能独立体验</p>
+          </div>
+        </div>
+        <div id="scene-grid" class="scene-grid"></div>
+      </section>
+
+      <section class="note-card soft-card">
+        <div class="badge-row">
+          <span class="badge">20 条 mock 数据</span>
+          <span class="badge">覆盖六种风格</span>
+          <span class="badge">0 网络请求</span>
+        </div>
+        <p>该目录用于互动空间上传。游园现场仍可展示完整版；扫码或上传时使用这个离线 Demo。</p>
+      </section>
+
+      <section class="footer-actions">
+        <a id="home-primary" class="primary-button" href="./input.html">开始转换</a>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+    <script src="./mock-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>转换结果 - 离线 Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="results">
+    <main class="phone-shell">
+      <header class="page-header">
+        <div>
+          <a class="pill-link" href="./tone.html">返回语气页</a>
+          <h1 class="page-title">转换结果</h1>
+          <p class="page-subtitle">本页结果 100% 来自本地 mock 数据，不依赖任何接口</p>
+        </div>
+      </header>
+
+      <section id="results-missing" class="state-card soft-card" hidden>
+        <h2 class="section-title">还不能生成结果</h2>
+        <p>请先选择沟通场景，并输入至少 2 个字的真实想法。</p>
+      </section>
+
+      <section id="results-content">
+        <section class="original-card soft-card">
+          <div class="badge-row">
+            <span class="badge">原话</span>
+            <span class="badge">离线 Demo</span>
+          </div>
+          <p id="original-text"></p>
+        </section>
+
+        <section class="note-card soft-card">
+          <div class="meta-row">
+            <span class="meta-pill"><strong>场景</strong><span id="results-scene"></span></span>
+            <span class="meta-pill"><strong>风格</strong><span id="results-style"></span></span>
+          </div>
+          <p id="matched-info"></p>
+        </section>
+
+        <section id="result-list" class="section-block"></section>
+
+        <section class="button-row spaced-section">
+          <button type="button" class="ghost-button" data-feedback="useful">这个结果有用</button>
+          <button type="button" class="ghost-button" data-feedback="regenerate">记录本地反馈</button>
+        </section>
+      </section>
+
+      <section class="footer-actions">
+        <a class="secondary-link" href="./tone.html">再调整语气</a>
+        <a class="primary-button" href="./input.html">换一种风格</a>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+    <script src="./mock-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

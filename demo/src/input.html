@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>输入原话 - 离线 Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="input">
+    <main class="phone-shell">
+      <header class="page-header">
+        <div>
+          <a class="pill-link" href="./index.html">返回首页</a>
+          <h1 class="page-title">你想说的话</h1>
+          <p id="scene-badge" class="page-subtitle">请先选一个场景</p>
+        </div>
+        <div class="top-actions">
+          <button id="fill-example" type="button" class="ghost-button">示例</button>
+          <button id="clear-input" type="button" class="ghost-button">清空</button>
+        </div>
+      </header>
+
+      <section class="section-block">
+        <h2 class="section-title">场景</h2>
+        <div id="input-scene-grid" class="scene-grid"></div>
+      </section>
+
+      <section class="section-block">
+        <div class="page-header">
+          <div>
+            <h2 class="section-title">原话输入</h2>
+            <p class="section-hint">至少输入 2 个字，后续结果完全在本地匹配</p>
+          </div>
+        </div>
+        <div class="section-card soft-card">
+          <textarea
+            id="raw-input"
+            class="text-input"
+            placeholder="例如：这个活不是我负责的，别老找我。"
+          ></textarea>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="page-header">
+          <div>
+            <h2 class="section-title">风格选择</h2>
+            <p class="section-hint">六种风格全部可用，结果从 20 条本地样本里匹配</p>
+          </div>
+        </div>
+        <div id="style-grid" class="scene-grid"></div>
+      </section>
+
+      <section class="footer-actions">
+        <a class="secondary-link" href="./index.html">返回首页</a>
+        <button id="input-continue" type="button" class="primary-button">继续到语气页</button>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+    <script src="./mock-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

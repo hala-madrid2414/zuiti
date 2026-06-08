@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>语气仪表盘 - 离线 Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="tone">
+    <main class="phone-shell">
+      <header class="page-header">
+        <div>
+          <a class="pill-link" href="./input.html">返回输入</a>
+          <h1 class="page-title">语气仪表盘</h1>
+          <p class="page-subtitle">本地调整礼貌、正式和距离感，不发起任何网络请求</p>
+        </div>
+        <button id="reset-sliders" type="button" class="ghost-button">重置</button>
+      </header>
+
+      <section id="tone-missing" class="state-card soft-card" hidden>
+        <h2 class="section-title">还差一句原话</h2>
+        <p>先回到输入页，选择场景并写下你想表达的真实想法。</p>
+      </section>
+
+      <section id="tone-content">
+        <section class="preview-card soft-card">
+          <p class="badge">实时预览</p>
+          <h2 class="section-title">表达预览</h2>
+          <p id="tone-preview">当前语气会尽量稳住关系，再把重点表达清楚。</p>
+        </section>
+
+        <section class="slider-group soft-card">
+          <div class="slider-head">
+            <strong>礼貌程度</strong>
+            <span class="slider-value" data-slider-value="politeness">76</span>
+          </div>
+          <div class="slider-range-row">
+            <span>直接</span>
+            <input data-slider="politeness" type="range" min="0" max="100" value="76" />
+            <span>礼貌</span>
+          </div>
+        </section>
+
+        <section class="slider-group soft-card">
+          <div class="slider-head">
+            <strong>正式程度</strong>
+            <span class="slider-value" data-slider-value="formality">58</span>
+          </div>
+          <div class="slider-range-row">
+            <span>日常</span>
+            <input data-slider="formality" type="range" min="0" max="100" value="58" />
+            <span>正式</span>
+          </div>
+        </section>
+
+        <section class="slider-group soft-card">
+          <div class="slider-head">
+            <strong>关系距离</strong>
+            <span class="slider-value" data-slider-value="distance">62</span>
+          </div>
+          <div class="slider-range-row">
+            <span>熟人</span>
+            <input data-slider="distance" type="range" min="0" max="100" value="62" />
+            <span>陌生/上级</span>
+          </div>
+        </section>
+      </section>
+
+      <section class="footer-actions">
+        <a class="secondary-link" href="./input.html">返回输入</a>
+        <button id="tone-continue" type="button" class="primary-button">查看结果</button>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+    <script src="./mock-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

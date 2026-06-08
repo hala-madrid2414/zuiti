@@ -30,6 +30,7 @@ htmlcov/
 
 # production
 /build
+/demo/dist/
 
 # misc
 .DS_Store

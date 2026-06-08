@@ -47,11 +47,32 @@ npm run dev
 ```bash
 npm run dev      # 本地开发
 npm run build    # 生产构建
+npm run build:demo # 构建互动空间离线 Demo，输出到 demo/dist
 npm run start    # 以生产模式启动（需先 build）
 npm run lint     # 代码规范检查
 ```
 
-### 3.3 环境变量（建议）
+### 3.3 离线 Demo 构建
+
+为了满足互动空间 `8MB` 包体限制和“不可联网”的要求，仓库新增了独立离线 Demo：
+
+- 源码目录：`demo/src/`
+- 构建产物：`demo/dist/`
+- 特点：完整四页流程、本地 `mock` 数据、零网络请求
+
+构建命令：
+
+```bash
+npm run build:demo
+```
+
+使用说明：
+
+- 互动空间上传：使用 `demo/dist/`
+- 现场完整演示：继续使用当前 Next.js 主站
+- 离线 Demo 内置 `20` 条样本，覆盖六种风格，不调用 `/api/*`
+
+### 3.4 环境变量（建议）
 
 本地使用 `.env.local`（不提交到仓库），仓库建议提供 `.env.example`（提交）用于说明需要哪些配置。
 
@@ -60,7 +81,7 @@ npm run lint     # 代码规范检查
 - `AI_BASE_URL`：可选，自建网关/代理地址
 - `AI_MODEL`：可选，模型名称
 
-## 3.4 文档导航（当前仓库入口）
+## 3.5 文档导航（当前仓库入口）
 
 如果你是第一次接手这个仓库，建议先按下面顺序阅读：
 
