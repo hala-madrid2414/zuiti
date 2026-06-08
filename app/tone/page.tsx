@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { MobileShell } from "@/components/MobileShell";
 import { PrimaryButton } from "@/components/PrimaryButton";
 import { ToneSlider } from "@/components/ToneSlider";
@@ -27,6 +27,9 @@ export default function TonePage() {
   const formal = sliders.formality;
   const distance = sliders.distance;
   const hasDraft = Boolean(scene && text.trim().length >= 2);
+
+  const hasMountedRef = useRef(false);
+
   const draft = buildDraft();
   const requestKey = draft ? createRequestKey(draft) : null;
 
@@ -69,6 +72,16 @@ export default function TonePage() {
     },
     [draft, setGenerationError, setGenerationLoading, setGenerationSuccess],
   );
+
+  // Auto-trigger AI generation on mount when draft is ready
+  useEffect(() => {
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true;
+      if (hasDraft && generation.status === "idle") {
+        void runGenerate();
+      }
+    }
+  }, [hasDraft, generation.status, runGenerate]);
 
   useEffect(() => {
     if (!draft || !requestKey) {
