@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:p0": "node --test tests/p0-regression.test.mjs",
+    "test:p1": "node --test tests/p1-regression.test.mjs",
+    "test:p2": "node --test tests/p2-regression.test.mjs",
+    "test:prd-v1.1": "node --test tests/prd-v1_1-regression.test.mjs"
   },
   "dependencies": {
     "@langchain/core": "^1.1.48",
