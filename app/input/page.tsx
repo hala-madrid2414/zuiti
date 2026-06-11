@@ -1,8 +1,8 @@
 "use client";
 
-import { Suspense, useEffect, useMemo } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import type { CSSProperties } from "react";
-import { TextArea, Toast } from "antd-mobile";
+import { TextArea } from "antd-mobile";
 import { useRouter, useSearchParams } from "next/navigation";
 import { DecorativeIcon } from "@/components/DecorativeIcon";
 import { MobileShell } from "@/components/MobileShell";
@@ -33,6 +33,7 @@ function InputContent() {
   const storeScene = useExpressionFlowStore((state) => state.scene);
   const applySceneDefaults = useExpressionFlowStore((state) => state.applySceneDefaults);
   const applyContextDefaults = useExpressionFlowStore((state) => state.applyContextDefaults);
+  const [feedback, setFeedback] = useState("");
 
   useEffect(() => {
     const sceneKey = searchParams.get("scene");
@@ -67,6 +68,7 @@ function InputContent() {
   );
 
   const handleSceneSelect = (sceneKey: Scene) => {
+    setFeedback("");
     setScene(sceneKey);
   };
 
@@ -75,39 +77,37 @@ function InputContent() {
       return;
     }
 
+    setFeedback("");
     applyContextDefaults(storeScene, targetKey);
   };
 
   const handleExample = () => {
-    if (!storeScene || !activeTarget) {
-      Toast.show({ content: inputPageCopy.exampleNeedsContextToast });
-      return;
-    }
-
-    setValue(exampleTextsByTarget[activeTarget]);
+    setFeedback("");
+    setValue(activeTarget ? exampleTextsByTarget[activeTarget] : inputPageCopy.exampleRawText);
   };
 
   const handleContinue = () => {
     if (!storeScene) {
-      Toast.show({ content: inputPageCopy.missingSceneToast });
+      setFeedback(inputPageCopy.missingSceneToast);
       return;
     }
 
     if (!activeTarget) {
-      Toast.show({ content: inputPageCopy.missingTargetToast });
+      setFeedback(inputPageCopy.missingTargetToast);
       return;
     }
 
     if (!activeStyle) {
-      Toast.show({ content: inputPageCopy.missingStyleToast });
+      setFeedback(inputPageCopy.missingStyleToast);
       return;
     }
 
     if (value.trim().length < minInputTextLength) {
-      Toast.show({ content: inputPageCopy.missingTextToast });
+      setFeedback(inputPageCopy.missingTextToast);
       return;
     }
 
+    setFeedback("");
     router.push("/tone");
   };
 
@@ -227,6 +227,11 @@ function InputContent() {
         <p className={stylesCss.hint}>
           {canContinue ? inputPageCopy.readyHint : inputPageCopy.blockedHint}
         </p>
+        {feedback ? (
+          <p className={stylesCss.feedbackHint} role="status" aria-live="polite">
+            {feedback}
+          </p>
+        ) : null}
         <div className={stylesCss.buttonWrapper}>
           <button type="button" className="primary-button" onClick={handleContinue} aria-disabled={!canContinue}>
             <span>{inputPageCopy.primaryAction}</span>

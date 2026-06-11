@@ -342,6 +342,16 @@
   color: #7d8496;
 }
 
+.feedbackHint {
+  margin: -4px 0 0;
+  min-height: 16px;
+  color: #b2723e;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 16px;
+  text-align: center;
+}
+
 .buttonWrapper {
   margin-top: auto;
   padding: 0 4px;
